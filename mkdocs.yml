@@ -1,0 +1,75 @@
+site_name: AWS Indusrty Blueprints for Data & AI
+docs_dir: docs/
+
+theme:
+  name: material
+  features:
+    - tabs
+nav:
+  - Overview: 'index.md'
+  - Componentized Mechanism: 'components.md'
+  - Core Concepts: 'core_concepts.md'
+  - Data Ingestion Pipeline Components: 
+    - Overview: 'overview_ingestion.md'
+    - FHIR Connector: 'comingsoon.md'
+    - FiveTran: 'comingsoon.md'
+    - Matillion: 'comingsoon.md'
+  - Add-on Use Case Components:
+    - Overview: 'overview_addon.md'
+    - RDS Plug & Play: 'https://github.com/aws-samples/amazon-isv-plug-n-play'
+    - Modular Architecture for Amazon Redshift Deployment: 'https://aws.amazon.com/quickstart/architecture/amazon-redshift/'
+    - Cabon Data Lake: 'https://aws.amazon.com/solutions/guidance/carbon-data-lake-on-aws/'
+    - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
+    - Alation: 'comingsoon.md'
+    - Collibra: 'comingsoon.md'
+    - AWS QuickSignt Gallery: 'https://aws.amazon.com/quicksight/gallery/'
+    - CI/CD of QuickSight Assets in SaaS Silo Deployment: 'https://github.com/aws-samples/saas-silo-quicksight-assets-cicd-solution'
+    - BI in a Box: 'comingsoon.md'
+    - Domo: 'comingsoon.md'
+    - Fraud Detection: 'comingsoon.md'
+    - ID Resolution: 'comingsoon.md'
+    - Amperity: 'comingsoon.md'
+    - Aerospike: 'comingsoon.md'
+  - Example Blueprints:
+    - Overview: 'overview_blueprints.md'
+    - Customer 360: 'comingsoon.md'
+    - Supply Chain: 'comingsoon.md'
+    - Healthcare & Life Science: 'comingsoon.md'
+    - Manufacture & Automotive: 'comingsoon.md'
+    - Retail & Advertising: 'comingsoon.md'
+    - Media & Entertainment: 'comingsoon.md'
+    - Financial Services Industry: 'comingsoon.md'
+    - Gaming: 'comingsoon.md'
+    - Sustainability: 'comingsoon.md'
+  - Trainings: 'trainings.md'
+  - Component request: 'request.md'
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+plugins:
+  - search
+  - glightbox:
+       touchNavigation: true
+       loop: false
+       effect: zoom
+       slide_effect: slide
+       width: 100%
+       height: auto
+       zoomable: true
+       draggable: true
+       skip_classes:
+         - custom-skip-class-name
+       auto_caption: false
+       caption_position: bottom
