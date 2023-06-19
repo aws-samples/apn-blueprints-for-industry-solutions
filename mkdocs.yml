@@ -34,7 +34,6 @@ nav:
     - Post Call Analytics (PCA): 'https://github.com/aws-samples/amazon-transcribe-post-call-analytics'
     - Live Call Analytics (LCA) with Agent Assist: 'https://github.com/aws-samples/amazon-transcribe-live-call-analytics'
     - Quantiphi Real-Time Call Analytics on AWS: 'https://aws-quickstart.github.io/quickstart-quantiphi-realtime-analytics/#_quantiphi_real_time_call_analytics_on_aws'
-    - 
   - Example Blueprints:
     - Overview: 'overview_blueprints.md'
     - Customer 360: 'comingsoon.md'
