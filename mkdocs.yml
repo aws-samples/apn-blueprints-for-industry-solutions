@@ -34,6 +34,8 @@ nav:
     - Post Call Analytics (PCA): 'https://github.com/aws-samples/amazon-transcribe-post-call-analytics'
     - Live Call Analytics (LCA) with Agent Assist: 'https://github.com/aws-samples/amazon-transcribe-live-call-analytics'
     - Quantiphi Real-Time Call Analytics on AWS: 'https://aws-quickstart.github.io/quickstart-quantiphi-realtime-analytics/#_quantiphi_real_time_call_analytics_on_aws'
+    - Automating data lineage on Amazon MWAA with OpenLineage: 'https://github.com/aws-samples/aws-mwaa-openlineage'
+    - Data Lineage for data lakes using AWS Glue, Amazon Neptune and Spline Agent: 'https://github.com/aws-samples/data-lineage-for-data-lake-example'
   - Example Blueprints:
     - Overview: 'overview_blueprints.md'
     - Customer 360: 'comingsoon.md'
