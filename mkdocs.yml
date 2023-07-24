@@ -13,15 +13,18 @@ nav:
     - Overview: 'overview_ingestion.md'
     - Streaming Data Solution for Amazon MSK: 'https://aws.amazon.com/solutions/implementations/streaming-data-solution-for-amazon-msk/'
     - Streaming Data Solution for Amazon Kinesis: 'https://aws.amazon.com/solutions/implementations/streaming-data-solution-for-amazon-kinesis/'
+    - Media Exchange on AWS: 'https://aws.amazon.com/solutions/implementations/media-exchange-on-aws/'
+    - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
+    - Media2Cloud on AWS: 'https://aws.amazon.com/solutions/implementations/media2cloud/'
     - FHIR Connector: 'comingsoon.md'
     - FiveTran: 'comingsoon.md'
     - Matillion: 'comingsoon.md'
+    - Informatica: 'comingsoon.md'
   - Add-on Use Case Components:
     - Overview: 'overview_addon.md'
     - RDS Plug & Play: 'https://github.com/aws-samples/amazon-isv-plug-n-play'
     - Modular Architecture for Amazon Redshift Deployment: 'https://aws.amazon.com/quickstart/architecture/amazon-redshift/'
     - Cabon Data Lake: 'https://aws.amazon.com/solutions/guidance/carbon-data-lake-on-aws/'
-    - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
     - Alation: 'comingsoon.md'
     - Collibra: 'comingsoon.md'
     - AWS QuickSignt Gallery: 'https://aws.amazon.com/quicksight/gallery/'
@@ -44,11 +47,13 @@ nav:
     - Real-Time Web Analytics with Kinesis Data Analytics: 'https://aws.amazon.com/solutions/implementations/real-time-web-analytics-with-kinesis/'
     - Digital User Engagement Events Database: 'https://aws.amazon.com/solutions/implementations/digital-user-engagement-events-database/'
     - Predictive Segmentation Using Amazon Pinpoint and Amazon SageMaker: 'https://aws.amazon.com/solutions/implementations/predictive-segmentation-using-amazon-pinpoint-and-amazon-sagemaker/'
-    - Media Exchange on AWS: 'https://aws.amazon.com/solutions/implementations/media-exchange-on-aws/'
     - Document Understanding Solution: 'https://aws.amazon.com/solutions/implementations/document-understanding-solution/'
     - Secure Media Delivery at the Edge on AWS: 'https://aws.amazon.com/solutions/implementations/secure-media-delivery-at-the-edge/'
     - Amazon Marketing Cloud Insights on AWS: 'https://aws.amazon.com/solutions/implementations/amazon-marketing-cloud-insights-on-aws/'
-    
+    - Video on Demand on AWS: 'https://aws.amazon.com/solutions/implementations/video-on-demand-on-aws/'
+    - Content Analysis on AWS: 'https://aws.amazon.com/solutions/implementations/content-analysis-on-aws/'
+
+
 
   - Example Blueprints:
     - Overview: 'overview_blueprints.md'
