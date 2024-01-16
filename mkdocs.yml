@@ -53,9 +53,6 @@ nav:
     - Amazon Marketing Cloud Insights on AWS: 'https://aws.amazon.com/solutions/implementations/amazon-marketing-cloud-insights-on-aws/'
     - Video on Demand on AWS: 'https://aws.amazon.com/solutions/implementations/video-on-demand-on-aws/'
     - Content Analysis on AWS: 'https://aws.amazon.com/solutions/implementations/content-analysis-on-aws/'
-
-
-
   - Example Blueprints:
     - Overview: 'overview_blueprints.md'
     - Customer 360: 'comingsoon.md'
