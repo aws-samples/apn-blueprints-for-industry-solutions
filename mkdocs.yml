@@ -16,8 +16,8 @@ nav:
     - Media Exchange on AWS: 'https://aws.amazon.com/solutions/implementations/media-exchange-on-aws/'
     - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
     - Media2Cloud on AWS: 'https://aws.amazon.com/solutions/implementations/media2cloud/'
-    - FiveTran: 'comingsoon.md'
-    - Matillion: 'comingsoon.md'
+    - FiveTran: 'docs/comingsoon.md'
+    - Matillion: 'docs/comingsoon.md'
     - Informatica: 'comingsoon.md'
   - Add-on Use Case Components:
     - Overview: 'overview_addon.md'
