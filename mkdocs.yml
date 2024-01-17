@@ -17,8 +17,8 @@ nav:
     - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
     - Media2Cloud on AWS: 'https://aws.amazon.com/solutions/implementations/media2cloud/'
     - FiveTran: 'comingsoon.md'
-    - Matillion: 'comingsoon.md'
-    - Informatica: 'comingsoon.md'
+    - Matillion: 'comingsoon1.md'
+    - Informatica: 'comingsoon2.md'
   - Add-on Use Case Components:
     - Overview: 'overview_addon.md'
     - RDS Plug & Play: 'https://github.com/aws-samples/amazon-isv-plug-n-play'
