@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dif package &mdash; DIF Sample Accelerator 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dif.stacks package" href="dif.stacks.html" />
+    <link rel="prev" title="dif" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DIF Sample Accelerator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">dif</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dif package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dif.stacks.html">dif.stacks package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.datalake_warehouse_project">dif.datalake_warehouse_project module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject"><code class="docutils literal notranslate"><span class="pre">DatalakeWarehouseProject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.ingestion_dms">dif.ingestion_dms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.ingestion_dms.DMSIngestion"><code class="docutils literal notranslate"><span class="pre">DMSIngestion</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.ingestion_streaming">dif.ingestion_streaming module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.ingestion_streaming.StreamingIngestion"><code class="docutils literal notranslate"><span class="pre">StreamingIngestion</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.post_deploy_resource">dif.post_deploy_resource module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.post_deploy_resource.PostDeployCode"><code class="docutils literal notranslate"><span class="pre">PostDeployCode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.retail_simulator_application">dif.retail_simulator_application module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.retail_simulator_application.RetailSimulatorApplication"><code class="docutils literal notranslate"><span class="pre">RetailSimulatorApplication</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif.bucket_deployment">dif.bucket_deployment module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dif.bucket_deployment.BucketDeployment"><code class="docutils literal notranslate"><span class="pre">BucketDeployment</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dif-cdkpipeline-project-module">dif.cdkpipeline_project module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dif">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DIF Sample Accelerator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">dif</a></li>
+      <li class="breadcrumb-item active">dif package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dif.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dif-package">
+<h1>dif package<a class="headerlink" href="#dif-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dif.stacks.html">dif.stacks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dif.stacks.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.stacks.html#module-dif.stacks">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dif.datalake_warehouse_project">
+<span id="dif-datalake-warehouse-project-module"></span><h2>dif.datalake_warehouse_project module<a class="headerlink" href="#module-dif.datalake_warehouse_project" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.datalake_warehouse_project.</span></span><span class="sig-name descname"><span class="pre">DatalakeWarehouseProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></p>
+<p>Create a datalake warehouse project 
+Args:</p>
+<blockquote>
+<div><p>Stack (_type_)  _description_</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vpc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasEmr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasRedshift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuseSharedAirflowStack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dif.stacks.airflow_env.nested_stacks.html#dif.stacks.airflow_env.nested_stacks.environment.AirflowEnvironmentStack" title="dif.stacks.airflow_env.nested_stacks.environment.AirflowEnvironmentStack"><span class="pre">AirflowEnvironmentStack</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasOpenlineage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuseOpenlineage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataHub</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'2.6.3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_env_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mw1.small'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_max_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_webserver_access_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PRIVATE_ONLY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_master_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m6gd.xlarge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_core_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m6gd.xlarge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_worker_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m6gd.xlarge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_core_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_worker_min_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emr_transient_worker_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redshift_etl_node_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NodeType.RA3_XLPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redshift_etl_node_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redshift_concurrency_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redshift_serverless_rpu_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_log_bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bucket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_log_bucket_prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – which application scope is this stack part of</p></li>
+<li><p><strong>id</strong> – whats the id of this stack</p></li>
+<li><p><strong>project_id</strong> – the project id which is used to name related resources and stacks. E.g. core, finance, marketing, c360 etc</p></li>
+<li><p><strong>vpc</strong> – Which VPC should project be created in</p></li>
+<li><p><strong>airflow_env_class</strong> – Defaults to “mw1.small”.</p></li>
+<li><p><strong>airflow_max_workers</strong> – Defaults to 1.</p></li>
+<li><p><strong>airflow_version</strong> – Defaults to “2.6.3”.</p></li>
+<li><p><strong>airflow_webserver_access_mode</strong> – Defaults to “PRIVATE_ONLY”.</p></li>
+<li><p><strong>emr_transient_core_size</strong> – Defaults to 2.</p></li>
+<li><p><strong>emr_transient_core_type</strong> – Defaults to ‘m6gd.xlarge’.</p></li>
+<li><p><strong>emr_transient_master_type</strong> – Defaults to ‘m6gd.xlarge’.</p></li>
+<li><p><strong>emr_transient_worker_max_size</strong> – Defaults to 10.</p></li>
+<li><p><strong>emr_transient_worker_min_size</strong> – Defaults to 1.</p></li>
+<li><p><strong>emr_transient_worker_type</strong> – Defaults to ‘m6gd.xlarge’.</p></li>
+<li><p><strong>hasEmr</strong> – If you are using EMR Studio and EMR serverless and clusters in the project. Recommended to be true to enable development experience with EMR studio.</p></li>
+<li><p><strong>hasOpenlineage</strong> – Openlineage backend (Marquez or Datahub). Defaults to False.</p></li>
+<li><p><strong>hasRedshift</strong> – If you are using Redshift set this to true. It will create a provisioned cluster and a serverless cluster. Provisioned cluster would be used for ETL while serverless for interacive querying.</p></li>
+<li><p><strong>redshift_concurrency_limit</strong> – Defaults to 5.</p></li>
+<li><p><strong>redshift_etl_node_count</strong> – Defaults to 1.</p></li>
+<li><p><strong>redshift_etl_node_type</strong> – Defaults to redshift.NodeType.RA3_XLPLUS.</p></li>
+<li><p><strong>redshift_serverless_rpu_limit</strong> – Defaults to 128.</p></li>
+<li><p><strong>reuseOpenlineage</strong> – Defaults to None.</p></li>
+<li><p><strong>reuseSharedAirflowStack</strong> – If you are reusing the Airflow stack from another project. Defaults to None.</p></li>
+<li><p><strong>s3_log_bucket</strong> – S3 access logs bucket for data project</p></li>
+<li><p><strong>s3_log_bucket_prefix</strong> – folder in which the access logs would be stored</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_openlineage">
+<span class="sig-name descname"><span class="pre">create_openlineage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_openlineage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_openlineage" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_airflow">
+<span class="sig-name descname"><span class="pre">create_project_airflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cicd_bucket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datadocs_bucket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_env_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_max_workers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">airflow_access_mode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_project_airflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_airflow" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_buckets">
+<span class="sig-name descname"><span class="pre">create_project_buckets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_log_bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bucket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_log_bucket_prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_project_buckets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_buckets" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_cicd">
+<span class="sig-name descname"><span class="pre">create_project_cicd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_project_cicd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_cicd" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_emr">
+<span class="sig-name descname"><span class="pre">create_project_emr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_project_emr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_emr" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_redshift">
+<span class="sig-name descname"><span class="pre">create_project_redshift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/datalake_warehouse_project.html#DatalakeWarehouseProject.create_project_redshift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.datalake_warehouse_project.DatalakeWarehouseProject.create_project_redshift" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dif.ingestion_dms">
+<span id="dif-ingestion-dms-module"></span><h2>dif.ingestion_dms module<a class="headerlink" href="#module-dif.ingestion_dms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.ingestion_dms.DMSIngestion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.ingestion_dms.</span></span><span class="sig-name descname"><span class="pre">DMSIngestion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/ingestion_dms.html#DMSIngestion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.ingestion_dms.DMSIngestion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Construct</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.ingestion_dms.DMSIngestion.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dms_ingestion_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vpc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ISecret</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bucket</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/ingestion_dms.html#DMSIngestion.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.ingestion_dms.DMSIngestion.__init__" title="Link to this definition"></a></dt>
+<dd><p>Creates a new construct node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – The scope in which to define this construct.</p></li>
+<li><p><strong>id</strong> – The scoped construct ID. Must be unique amongst siblings. If the ID includes a path separator (<code class="docutils literal notranslate"><span class="pre">/</span></code>), then it will be replaced by double dash <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dif.ingestion_streaming">
+<span id="dif-ingestion-streaming-module"></span><h2>dif.ingestion_streaming module<a class="headerlink" href="#module-dif.ingestion_streaming" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.ingestion_streaming.StreamingIngestion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.ingestion_streaming.</span></span><span class="sig-name descname"><span class="pre">StreamingIngestion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/ingestion_streaming.html#StreamingIngestion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.ingestion_streaming.StreamingIngestion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Construct</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.ingestion_streaming.StreamingIngestion.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">streaming_ingestion_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinesis_stream_arn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bucket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/ingestion_streaming.html#StreamingIngestion.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.ingestion_streaming.StreamingIngestion.__init__" title="Link to this definition"></a></dt>
+<dd><p>Creates a new construct node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – The scope in which to define this construct.</p></li>
+<li><p><strong>id</strong> – The scoped construct ID. Must be unique amongst siblings. If the ID includes a path separator (<code class="docutils literal notranslate"><span class="pre">/</span></code>), then it will be replaced by double dash <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dif.post_deploy_resource">
+<span id="dif-post-deploy-resource-module"></span><h2>dif.post_deploy_resource module<a class="headerlink" href="#module-dif.post_deploy_resource" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.post_deploy_resource.PostDeployCode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.post_deploy_resource.</span></span><span class="sig-name descname"><span class="pre">PostDeployCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/post_deploy_resource.html#PostDeployCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.post_deploy_resource.PostDeployCode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Construct</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.post_deploy_resource.PostDeployCode.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_deploy_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Policy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_index_py_folder_with_requirements_txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler_function_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/post_deploy_resource.html#PostDeployCode.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.post_deploy_resource.PostDeployCode.__init__" title="Link to this definition"></a></dt>
+<dd><p>Creates a new construct node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – The scope in which to define this construct.</p></li>
+<li><p><strong>id</strong> – The scoped construct ID. Must be unique amongst siblings. If the ID includes a path separator (<code class="docutils literal notranslate"><span class="pre">/</span></code>), then it will be replaced by double dash <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dif.retail_simulator_application">
+<span id="dif-retail-simulator-application-module"></span><h2>dif.retail_simulator_application module<a class="headerlink" href="#module-dif.retail_simulator_application" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.retail_simulator_application.RetailSimulatorApplication">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.retail_simulator_application.</span></span><span class="sig-name descname"><span class="pre">RetailSimulatorApplication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/retail_simulator_application.html#RetailSimulatorApplication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.retail_simulator_application.RetailSimulatorApplication" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Construct</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.retail_simulator_application.RetailSimulatorApplication.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vpc</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/retail_simulator_application.html#RetailSimulatorApplication.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.retail_simulator_application.RetailSimulatorApplication.__init__" title="Link to this definition"></a></dt>
+<dd><p>Creates a new construct node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – The scope in which to define this construct.</p></li>
+<li><p><strong>id</strong> – The scoped construct ID. Must be unique amongst siblings. If the ID includes a path separator (<code class="docutils literal notranslate"><span class="pre">/</span></code>), then it will be replaced by double dash <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.retail_simulator_application.RetailSimulatorApplication.create_retail_simulator">
+<span class="sig-name descname"><span class="pre">create_retail_simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/retail_simulator_application.html#RetailSimulatorApplication.create_retail_simulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.retail_simulator_application.RetailSimulatorApplication.create_retail_simulator" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dif.bucket_deployment">
+<span id="dif-bucket-deployment-module"></span><h2>dif.bucket_deployment module<a class="headerlink" href="#module-dif.bucket_deployment" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dif.bucket_deployment.BucketDeployment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dif.bucket_deployment.</span></span><span class="sig-name descname"><span class="pre">BucketDeployment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/bucket_deployment.html#BucketDeployment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.bucket_deployment.BucketDeployment" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BucketDeployment</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dif.bucket_deployment.BucketDeployment.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Construct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dif/bucket_deployment.html#BucketDeployment.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dif.bucket_deployment.BucketDeployment.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – <ul>
+<li></li>
+</ul>
+</p></li>
+<li><p><strong>id</strong> – <ul>
+<li></li>
+</ul>
+</p></li>
+<li><p><strong>destination_bucket</strong> – The S3 bucket to sync the contents of the zip file to.</p></li>
+<li><p><strong>sources</strong> – The sources from which to deploy the contents of this bucket.</p></li>
+<li><p><strong>access_control</strong> – System-defined x-amz-acl metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>cache_control</strong> – System-defined cache-control metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>content_disposition</strong> – System-defined cache-disposition metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>content_encoding</strong> – System-defined content-encoding metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>content_language</strong> – System-defined content-language metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>content_type</strong> – System-defined content-type metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>destination_key_prefix</strong> – Key prefix in the destination bucket. Must be &lt;=104 characters Default: “/” (unzip to root of the destination bucket)</p></li>
+<li><p><strong>distribution</strong> – The CloudFront distribution using the destination bucket as an origin. Files in the distribution’s edge caches will be invalidated after files are uploaded to the destination bucket. Default: - No invalidation occurs</p></li>
+<li><p><strong>distribution_paths</strong> – The file paths to invalidate in the CloudFront distribution. Default: - All files under the destination bucket key prefix will be invalidated.</p></li>
+<li><p><strong>ephemeral_storage_size</strong> – The size of the AWS Lambda function’s /tmp directory in MiB. Default: 512 MiB</p></li>
+<li><p><strong>exclude</strong> – If this is set, matching files or objects will be excluded from the deployment’s sync command. This can be used to exclude a file from being pruned in the destination bucket. If you want to just exclude files from the deployment package (which excludes these files evaluated when invalidating the asset), you should leverage the <code class="docutils literal notranslate"><span class="pre">exclude</span></code> property of <code class="docutils literal notranslate"><span class="pre">AssetOptions</span></code> when defining your source. Default: - No exclude filters are used</p></li>
+<li><p><strong>expires</strong> – System-defined expires metadata to be set on all objects in the deployment. Default: - The objects in the distribution will not expire.</p></li>
+<li><p><strong>extract</strong> – If this is set, the zip file will be synced to the destination S3 bucket and extracted. If false, the file will remain zipped in the destination bucket. Default: true</p></li>
+<li><p><strong>include</strong> – If this is set, matching files or objects will be included with the deployment’s sync command. Since all files from the deployment package are included by default, this property is usually leveraged alongside an <code class="docutils literal notranslate"><span class="pre">exclude</span></code> filter. Default: - No include filters are used and all files are included with the sync command</p></li>
+<li><p><strong>log_group</strong> – The Log Group used for logging of events emitted by the custom resource’s lambda function. Providing a user-controlled log group was rolled out to commercial regions on 2023-11-16. If you are deploying to another type of region, please check regional availability first. Default: - a default log group created by AWS Lambda</p></li>
+<li><p><strong>log_retention</strong> – The number of days that the lambda function’s log events are kept in CloudWatch Logs. This is a legacy API and we strongly recommend you migrate to <code class="docutils literal notranslate"><span class="pre">logGroup</span></code> if you can. <code class="docutils literal notranslate"><span class="pre">logGroup</span></code> allows you to create a fully customizable log group and instruct the Lambda function to send logs to it. Default: logs.RetentionDays.INFINITE</p></li>
+<li><p><strong>memory_limit</strong> – The amount of memory (in MiB) to allocate to the AWS Lambda function which replicates the files from the CDK bucket to the destination bucket. If you are deploying large files, you will need to increase this number accordingly. Default: 128</p></li>
+<li><p><strong>metadata</strong> – User-defined object metadata to be set on all objects in the deployment. Default: - No user metadata is set</p></li>
+<li><p><strong>prune</strong> – If this is set to false, files in the destination bucket that do not exist in the asset, will NOT be deleted during deployment (create/update). Default: true</p></li>
+<li><p><strong>retain_on_delete</strong> – If this is set to “false”, the destination files will be deleted when the resource is deleted or the destination is updated. NOTICE: Configuring this to “false” might have operational implications. Please visit to the package documentation referred below to make sure you fully understand those implications. Default: true - when resource is deleted/updated, files are retained</p></li>
+<li><p><strong>role</strong> – Execution role associated with this function. Default: - A role is automatically created</p></li>
+<li><p><strong>server_side_encryption</strong> – System-defined x-amz-server-side-encryption metadata to be set on all objects in the deployment. Default: - Server side encryption is not used.</p></li>
+<li><p><strong>server_side_encryption_aws_kms_key_id</strong> – System-defined x-amz-server-side-encryption-aws-kms-key-id metadata to be set on all objects in the deployment. Default: - Not set.</p></li>
+<li><p><strong>server_side_encryption_customer_algorithm</strong> – System-defined x-amz-server-side-encryption-customer-algorithm metadata to be set on all objects in the deployment. Warning: This is not a useful parameter until this bug is fixed: <a class="reference external" href="https://github.com/aws/aws-cdk/issues/6080">https://github.com/aws/aws-cdk/issues/6080</a> Default: - Not set.</p></li>
+<li><p><strong>sign_content</strong> – If set to true, uploads will precompute the value of <code class="docutils literal notranslate"><span class="pre">x-amz-content-sha256</span></code> and include it in the signed S3 request headers. Default: - <code class="docutils literal notranslate"><span class="pre">x-amz-content-sha256</span></code> will not be computed</p></li>
+<li><p><strong>storage_class</strong> – System-defined x-amz-storage-class metadata to be set on all objects in the deployment. Default: - Default storage-class for the bucket is used.</p></li>
+<li><p><strong>use_efs</strong> – Mount an EFS file system. Enable this if your assets are large and you encounter disk space errors. Enabling this option will require a VPC to be specified. Default: - No EFS. Lambda has access only to 512MB of disk space.</p></li>
+<li><p><strong>vpc</strong> – The VPC network to place the deployment lambda handler in. This is required if <code class="docutils literal notranslate"><span class="pre">useEfs</span></code> is set. Default: None</p></li>
+<li><p><strong>vpc_subnets</strong> – Where in the VPC to place the deployment lambda handler. Only used if ‘vpc’ is supplied. Default: - the Vpc default strategy if not specified</p></li>
+<li><p><strong>website_redirect_location</strong> – System-defined x-amz-website-redirect-location metadata to be set on all objects in the deployment. Default: - No website redirection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dif-cdkpipeline-project-module">
+<h2>dif.cdkpipeline_project module<a class="headerlink" href="#dif-cdkpipeline-project-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dif">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dif" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="dif" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dif.stacks.html" class="btn btn-neutral float-right" title="dif.stacks package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Shishir Chandra Choudhary.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

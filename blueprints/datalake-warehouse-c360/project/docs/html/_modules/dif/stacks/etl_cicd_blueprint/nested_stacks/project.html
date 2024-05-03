@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dif.stacks.etl_cicd.nested_stacks.project &mdash; DIF Sample Accelerator 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            DIF Sample Accelerator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules.html">dif</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">DIF Sample Accelerator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dif.stacks.etl_cicd.nested_stacks.project</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dif.stacks.etl_cicd.nested_stacks.project</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.</span>
+<span class="c1"># SPDX-License-Identifier: MIT-0</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Aws</span><span class="p">,</span>
+    <span class="n">CfnOutput</span><span class="p">,</span>
+    <span class="n">RemovalPolicy</span><span class="p">,</span>
+    <span class="n">Stack</span><span class="p">,</span>
+    <span class="n">NestedStack</span><span class="p">,</span>
+    <span class="n">aws_s3</span> <span class="k">as</span> <span class="n">s3</span><span class="p">,</span>
+    <span class="n">aws_s3_deployment</span> <span class="k">as</span> <span class="n">s3d</span><span class="p">,</span>
+    <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span><span class="p">,</span>
+    <span class="n">aws_codepipeline</span> <span class="k">as</span> <span class="n">codepipeline</span><span class="p">,</span>
+    <span class="n">aws_codepipeline_actions</span> <span class="k">as</span> <span class="n">codepipeline_actions</span><span class="p">,</span>
+    <span class="n">aws_codecommit</span> <span class="k">as</span> <span class="n">codecommit</span><span class="p">,</span>
+    <span class="n">aws_codebuild</span> <span class="k">as</span> <span class="n">codebuild</span><span class="p">,</span>
+    <span class="n">aws_ec2</span> <span class="k">as</span> <span class="n">ec2</span><span class="p">,</span> 
+    <span class="n">aws_cloud9_alpha</span> <span class="k">as</span> <span class="n">cloud9</span><span class="p">,</span>
+    <span class="n">aws_kms</span> <span class="k">as</span> <span class="n">kms</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<span class="kn">from</span> <span class="nn">aws_cdk.aws_glue_alpha</span> <span class="kn">import</span> <span class="n">S3Table</span><span class="p">,</span> <span class="n">Database</span><span class="p">,</span> <span class="n">DataFormat</span><span class="p">,</span> <span class="n">Schema</span>
+<span class="kn">from</span> <span class="nn">dif.bucket_deployment</span> <span class="kn">import</span> <span class="n">BucketDeployment</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">cdk_nag</span> <span class="kn">import</span> <span class="n">NagSuppressions</span>
+<span class="kn">from</span> <span class="nn">dif.bucket_deployment</span> <span class="kn">import</span> <span class="n">BucketDeployment</span>
+
+
+<div class="viewcode-block" id="DbtProjectStack">
+<a class="viewcode-back" href="../../../../../dif.stacks.etl_cicd.nested_stacks.html#dif.stacks.etl_cicd.nested_stacks.project.DbtProjectStack">[docs]</a>
+<span class="k">class</span> <span class="nc">DbtProjectStack</span><span class="p">(</span><span class="n">Stack</span><span class="p">):</span>
+<div class="viewcode-block" id="DbtProjectStack.__init__">
+<a class="viewcode-back" href="../../../../../dif.stacks.etl_cicd.nested_stacks.html#dif.stacks.etl_cicd.nested_stacks.project.DbtProjectStack.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span>
+        <span class="n">construct_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">mwaa_bucket</span><span class="p">:</span> <span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>
+        <span class="n">bronze_bucket</span><span class="p">:</span><span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>  
+        <span class="n">silver_bucket</span><span class="p">:</span><span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>  
+        <span class="n">gold_bucket</span><span class="p">:</span><span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>  
+        <span class="n">datadocs_bucket</span><span class="p">:</span><span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>  
+        <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span> <span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">construct_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">package_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-emr-dbtproject&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">silver_bucket</span> <span class="o">=</span> <span class="n">silver_bucket</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gold_bucket</span> <span class="o">=</span> <span class="n">gold_bucket</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bronze_bucket</span> <span class="o">=</span> <span class="n">bronze_bucket</span>
+        <span class="n">airflow_bucket</span> <span class="o">=</span> <span class="n">mwaa_bucket</span>
+        
+
+        
+        
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-datalake-bronze&quot;</span><span class="p">,</span><span class="n">database_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">bronze&quot;</span><span class="p">,</span><span class="n">location_uri</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">s3_url_for_object</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-datalake-silver&quot;</span><span class="p">,</span><span class="n">database_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">silver&quot;</span><span class="p">,</span><span class="n">location_uri</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">s3_url_for_object</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-datalake-gold&quot;</span><span class="p">,</span><span class="n">database_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">gold&quot;</span><span class="p">,</span><span class="n">location_uri</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gold_bucket</span><span class="o">.</span><span class="n">s3_url_for_object</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">notebook_role</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">Role</span><span class="p">(</span>
+                                <span class="bp">self</span><span class="p">,</span>
+                                <span class="s2">&quot;c360-notebook-role&quot;</span><span class="p">,</span>
+                                <span class="n">role_name</span><span class="o">=</span><span class="s2">&quot;c360_notebook_role&quot;</span><span class="p">,</span>
+                                <span class="n">assumed_by</span><span class="o">=</span>
+                                <span class="n">iam</span><span class="o">.</span><span class="n">ServicePrincipal</span><span class="p">(</span>
+                                    <span class="s1">&#39;glue.amazonaws.com&#39;</span><span class="p">),</span>
+                                
+                                    <span class="n">inline_policies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;notebookinline&quot;</span><span class="p">:</span><span class="n">iam</span><span class="o">.</span><span class="n">PolicyDocument</span><span class="p">(</span>
+                                        <span class="n">statements</span><span class="o">=</span><span class="p">[</span>
+                                        <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                                            <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                                            <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                                            <span class="p">],</span>
+                                            <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                                                <span class="s2">&quot;s3:*Object&quot;</span><span class="p">,</span> 
+                                                <span class="s2">&quot;s3:Get*&quot;</span><span class="p">,</span>
+                                                <span class="s2">&quot;s3:List*&quot;</span><span class="p">],</span>
+                                        <span class="p">),</span>
+                                        <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                                            <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                                            <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                                            <span class="p">],</span>
+                                            <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:*Object&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">],</span>
+                                        <span class="p">),</span>
+                                        <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                                            <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                                            <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                                <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::aws-glue-assets-</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">REGION</span><span class="si">}</span><span class="s2">/*&quot;</span>
+                                            <span class="p">],</span>
+                                            <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:*Object&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">],</span>
+                                        <span class="p">),</span>
+                                        <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                                            <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                                            <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                                <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:role/c360_notebook_role&quot;</span>
+                                            <span class="p">],</span>
+                                            <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;iam:PassRole&quot;</span><span class="p">],</span>
+                                        <span class="p">)</span>
+                                    <span class="p">]</span>
+                                <span class="p">)</span>
+                                    
+                                <span class="p">}</span>
+                            <span class="p">)</span>
+
+        <span class="n">nag_suppress_s3_resource</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Action::s3:*Object&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;Action::s3:Get*&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;Action::s3:List*&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;Action::s3:List*&quot;</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;Resource::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">bronze_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">.Arn&gt;/*&quot;</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;Resource::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">silver_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">.Arn&gt;/*&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;Resource::arn:aws:s3:::aws-glue-assets-&lt;AWS::AccountId&gt;-&lt;AWS::Region&gt;/*&quot;</span><span class="p">]</span>
+        
+        <span class="n">NagSuppressions</span><span class="o">.</span><span class="n">add_resource_suppressions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notebook_role</span><span class="p">,[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;AwsSolutions-IAM5&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s1">&#39;EMR Notebook Role Can Only Operate on Project Buckets and Project Databases&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;appliesTo&quot;</span><span class="p">:</span><span class="n">nag_suppress_s3_resource</span>
+            <span class="p">}</span>
+        <span class="p">],</span><span class="n">apply_to_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">code_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;etl&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">zip_path</span> <span class="o">=</span> <span class="n">DbtProjectStack</span><span class="o">.</span><span class="n">zip_directory</span><span class="p">(</span><span class="n">code_path</span><span class="p">,</span> <span class="n">project_id</span><span class="p">)</span>
+        <span class="c1">#print(f&#39;zip_path={zip_path}&#39;)</span>
+
+       
+
+        <span class="n">assets</span> <span class="o">=</span> <span class="n">BucketDeployment</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-mwaa-project-code-assets&quot;</span><span class="p">,</span>
+            <span class="n">destination_bucket</span><span class="o">=</span><span class="n">airflow_bucket</span><span class="p">,</span>
+            <span class="n">cache_control</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">s3d</span><span class="o">.</span><span class="n">CacheControl</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span>
+                    <span class="s2">&quot;max-age=0,no-cache,no-store,must-revalidate&quot;</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">s3d</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">asset</span><span class="p">(</span><span class="n">zip_path</span><span class="p">)],</span>
+            <span class="n">retain_on_delete</span><span class="o">=</span><span class="kc">False</span>
+            
+        <span class="p">)</span>
+        
+       
+        <span class="n">codecommitrepo</span> <span class="o">=</span> <span class="n">codecommit</span><span class="o">.</span><span class="n">CfnRepository</span><span class="p">(</span>
+            <span class="n">scope</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">code</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;branch_name&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;s3&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bucket&quot;</span><span class="p">:</span> <span class="n">airflow_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">_code.zip&quot;</span><span class="p">},</span>
+            <span class="p">},</span>
+            <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-codecommit&quot;</span><span class="p">,</span>
+            <span class="n">repository_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">codecommitrepo</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">add_dependency</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+        <span class="n">build_project_role</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">Role</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-codebuild-role&quot;</span><span class="p">,</span>
+            <span class="n">role_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">_dbt_codebuild_role&quot;</span><span class="p">,</span>
+            <span class="n">assumed_by</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">ServicePrincipal</span><span class="p">(</span><span class="s2">&quot;codebuild.amazonaws.com&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">build_project_role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">mwaa_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mwaa_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                    <span class="n">airflow_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">airflow_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">code_build_key</span> <span class="o">=</span> <span class="n">kms</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-etl-codebuild-project-key&quot;</span><span class="p">,</span><span class="n">enable_key_rotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">deploy_project</span> <span class="o">=</span> <span class="n">codebuild</span><span class="o">.</span><span class="n">PipelineProject</span><span class="p">(</span>
+            <span class="n">scope</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-deployto-mwaa-bucket&quot;</span><span class="p">,</span>
+            <span class="n">project_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-deployto-mwaabucket&quot;</span><span class="p">,</span>
+            <span class="n">encryption_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">code_build_key</span><span class="p">,</span>
+            <span class="n">environment</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildEnvironment</span><span class="p">(</span>
+                <span class="n">privileged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">build_image</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">LinuxBuildImage</span><span class="o">.</span><span class="n">AMAZON_LINUX_2_3</span>
+            <span class="p">),</span>
+            <span class="n">environment_variables</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;BUCKET_NAME&quot;</span><span class="p">:</span> <span class="n">codebuild</span><span class="o">.</span><span class="n">BuildEnvironmentVariable</span><span class="p">(</span>
+                    <span class="n">value</span><span class="o">=</span><span class="n">mwaa_bucket</span><span class="o">.</span><span class="n">bucket_name</span>
+                <span class="p">),</span>
+            <span class="p">},</span>
+            <span class="n">role</span><span class="o">=</span><span class="n">build_project_role</span><span class="p">,</span>
+            <span class="n">build_spec</span><span class="o">=</span><span class="n">codebuild</span><span class="o">.</span><span class="n">BuildSpec</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span>
+                <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span><span class="p">,</span>
+                    <span class="n">phases</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;pre_build&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commands&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;aws --version&quot;</span><span class="p">]},</span>
+                        <span class="s2">&quot;build&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;commands&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;make deploy bucket-name=$BUCKET_NAME&quot;</span><span class="p">]},</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        
+        <span class="n">nag_suppress_codebuild_resource</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Resource::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">mwaa_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">.Arn&gt;/*&quot;</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;Resource::arn:&lt;AWS::Partition&gt;:logs:&lt;AWS::Region&gt;:&lt;AWS::AccountId&gt;:log-group:/aws/codebuild/&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">deploy_project</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;:*&quot;</span><span class="p">,</span>
+                                     <span class="sa">f</span><span class="s2">&quot;Resource::arn:&lt;AWS::Partition&gt;:codebuild:&lt;AWS::Region&gt;:&lt;AWS::AccountId&gt;:report-group/&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">deploy_project</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;-*&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;Action::kms:ReEncrypt*&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;Action::kms:GenerateDataKey*&quot;</span>
+                                     <span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nag_suppress_codebuild_resource&quot;</span><span class="p">,</span><span class="n">nag_suppress_codebuild_resource</span><span class="p">)</span>
+
+        
+        <span class="n">NagSuppressions</span><span class="o">.</span><span class="n">add_resource_suppressions</span><span class="p">(</span><span class="n">build_project_role</span><span class="p">,[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;AwsSolutions-IAM5&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s1">&#39;Codebuild for ETL pipeline requires access to CICD bucket and log and report group&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;appliesTo&quot;</span><span class="p">:</span><span class="n">nag_suppress_codebuild_resource</span>
+            <span class="p">}</span>
+            
+        <span class="p">],</span><span class="n">apply_to_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">codepipeline</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span>
+            <span class="n">scope</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">artifact_bucket</span><span class="o">=</span><span class="n">mwaa_bucket</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-pipeline&quot;</span><span class="p">,</span>
+            <span class="n">pipeline_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="si">}</span><span class="s2">-pipeline&quot;</span><span class="p">,</span>
+            <span class="n">restart_execution_on_update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            
+        <span class="p">)</span>
+        <span class="n">source_artifact</span> <span class="o">=</span> <span class="n">codepipeline</span><span class="o">.</span><span class="n">Artifact</span><span class="p">()</span>
+
+        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+            <span class="n">stage_name</span><span class="o">=</span><span class="s2">&quot;Source&quot;</span><span class="p">,</span>
+            <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">codepipeline_actions</span><span class="o">.</span><span class="n">CodeCommitSourceAction</span><span class="p">(</span>
+                    <span class="n">action_name</span><span class="o">=</span><span class="s2">&quot;CodeCommit&quot;</span><span class="p">,</span>
+                    <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+                    <span class="n">output</span><span class="o">=</span><span class="n">source_artifact</span><span class="p">,</span>
+                    <span class="n">trigger</span><span class="o">=</span><span class="n">codepipeline_actions</span><span class="o">.</span><span class="n">CodeCommitTrigger</span><span class="o">.</span><span class="n">POLL</span><span class="p">,</span>
+                    <span class="n">repository</span><span class="o">=</span><span class="n">codecommit</span><span class="o">.</span><span class="n">Repository</span><span class="o">.</span><span class="n">from_repository_name</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">,</span>
+                        <span class="n">repository_name</span><span class="o">=</span><span class="n">codecommitrepo</span><span class="o">.</span><span class="n">repository_name</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">pipeline</span><span class="o">.</span><span class="n">add_stage</span><span class="p">(</span>
+            <span class="n">stage_name</span><span class="o">=</span><span class="s2">&quot;DeployToAirflowBucket&quot;</span><span class="p">,</span>
+            <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">codepipeline_actions</span><span class="o">.</span><span class="n">CodeBuildAction</span><span class="p">(</span>
+                    <span class="n">action_name</span><span class="o">=</span><span class="s2">&quot;DeployToAirflowBucket&quot;</span><span class="p">,</span>
+                    <span class="nb">input</span><span class="o">=</span><span class="n">source_artifact</span><span class="p">,</span>
+                    <span class="n">project</span><span class="o">=</span><span class="n">deploy_project</span><span class="p">,</span>
+                    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">codepipeline</span><span class="o">.</span><span class="n">Artifact</span><span class="p">()],</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+        <span class="p">)</span></div>
+
+        
+        <span class="c1"># owner = cloud9.Owner.user(admin)</span>
+        <span class="c1"># repoExisting = codecommit.Repository.from_repository_name(self, &#39;RepoExisting&#39;, self.package_name);</span>
+
+        <span class="c1"># self.cloud9 = cloud9.Ec2Environment(self, &quot;C360AdminCloud9&quot;, description=&quot;C360 Admin &quot;,ec2_environment_name=&quot;C360 Admin&quot;,</span>
+        <span class="c1">#                                     vpc=vpc,</span>
+        <span class="c1">#                                     instance_type=ec2.InstanceType(&quot;t3.micro&quot;),</span>
+        <span class="c1">#                                      image_id=cloud9.ImageId.AMAZON_LINUX_2,</span>
+        <span class="c1">#                                      owner=owner,cloned_repositories=[cloud9.CloneRepository.from_code_commit(repoExisting,&quot;/&quot;)])</span>
+        
+        <span class="c1"># CfnOutput(self, &quot;Cloud9UrlC360&quot;, value=self.cloud9.ide_url)</span>
+        
+    
+
+<div class="viewcode-block" id="DbtProjectStack.zip_directory">
+<a class="viewcode-back" href="../../../../../dif.stacks.etl_cicd.nested_stacks.html#dif.stacks.etl_cicd.nested_stacks.project.DbtProjectStack.zip_directory">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">zip_directory</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">project_id</span><span class="p">):</span>
+        <span class="n">zipped_file_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1">#print(f&quot;***** HELLO ***** {path} , {project_id}&quot;)</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="n">tmpdirname</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+                <span class="c1">#print(&#39;created temporary directory&#39;, tmpdirname)</span>
+                <span class="n">temp_project_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tmpdirname</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">temp_project_path</span><span class="p">)</span>
+                <span class="n">glob_pattern</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dags/*.py&quot;</span>
+                <span class="c1">#print(glob_pattern)</span>
+                <span class="n">dag_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">temp_project_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">glob_pattern</span><span class="p">)]</span>
+                <span class="n">all_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">temp_project_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)]</span>
+                <span class="c1">#print(dag_files, all_files)</span>
+                <span class="k">for</span> <span class="n">dag_file_name</span> <span class="ow">in</span> <span class="n">dag_files</span><span class="p">:</span>
+                    <span class="c1">#print(f&quot;\n\n  processing {dag_file_name}&quot;)</span>
+                    <span class="n">file_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dag_file_name</span><span class="p">,</span><span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dag_f</span><span class="p">:</span>
+                        <span class="n">file_text</span> <span class="o">=</span> <span class="n">dag_f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dag_file_name</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dag_f</span><span class="p">:</span>
+                        <span class="n">replaced_text</span> <span class="o">=</span> <span class="n">file_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;~~PROJECT_NAME~~&quot;</span><span class="p">,</span><span class="n">project_id</span><span class="p">)</span>
+                        <span class="c1">#print(&quot;** updated text **&quot;)</span>
+                        <span class="c1">#print(replaced_text[:100])</span>
+                        <span class="n">dag_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">replaced_text</span><span class="p">)</span>
+                        
+                <span class="n">zippath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">_code.zip&quot;</span>
+                <span class="c1">#print(zippath)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">zippath</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">zippath</span><span class="p">):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zippath</span><span class="p">)</span>
+                <span class="n">zipped_file_path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">_code&quot;</span><span class="p">,</span> <span class="s2">&quot;zip&quot;</span><span class="p">,</span> <span class="n">temp_project_path</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">zipped_file_path</span><span class="p">,</span><span class="n">temp_project_path</span><span class="p">)</span>
+                <span class="n">zipped_file_path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">_code&quot;</span><span class="p">,</span> <span class="s2">&quot;zip&quot;</span><span class="p">,</span> <span class="n">temp_project_path</span><span class="p">)</span>
+                <span class="c1">#print(f&#39;zipped_file_path={zipped_file_path}&#39;)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to zip due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">zipped_file_path</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Shishir Chandra Choudhary.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
