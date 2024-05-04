@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dif.stacks.airflow_env.nested_stacks.environment &mdash; DIF Sample Accelerator 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            DIF Sample Accelerator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules.html">dif</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">DIF Sample Accelerator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dif.stacks.airflow_env.nested_stacks.environment</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dif.stacks.airflow_env.nested_stacks.environment</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.</span>
+<span class="c1"># SPDX-License-Identifier: MIT-0</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span>  <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">aws_cdk</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Aws</span><span class="p">,</span>
+    <span class="n">Stack</span><span class="p">,</span>
+    <span class="n">NestedStack</span><span class="p">,</span>
+    <span class="n">CfnOutput</span><span class="p">,</span>
+    <span class="n">CfnJson</span><span class="p">,</span>
+    <span class="n">aws_iam</span> <span class="k">as</span> <span class="n">iam</span><span class="p">,</span>
+    <span class="n">aws_s3</span> <span class="k">as</span> <span class="n">s3</span><span class="p">,</span>
+    <span class="n">aws_s3_deployment</span> <span class="k">as</span> <span class="n">s3deploy</span><span class="p">,</span>
+    <span class="n">aws_mwaa</span> <span class="k">as</span> <span class="n">mwaa</span><span class="p">,</span>
+    <span class="n">aws_ec2</span> <span class="k">as</span> <span class="n">ec2</span><span class="p">,</span>
+    <span class="n">RemovalPolicy</span><span class="p">,</span>
+    <span class="n">CfnTag</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">constructs</span> <span class="kn">import</span> <span class="n">Construct</span>
+<span class="kn">from</span> <span class="nn">dif.bucket_deployment</span> <span class="kn">import</span> <span class="n">BucketDeployment</span>
+<span class="kn">from</span> <span class="nn">cdk_nag</span> <span class="kn">import</span> <span class="n">NagSuppressions</span>
+
+<div class="viewcode-block" id="AirflowEnvironmentStack">
+<a class="viewcode-back" href="../../../../../dif.stacks.airflow_env.nested_stacks.html#dif.stacks.airflow_env.nested_stacks.environment.AirflowEnvironmentStack">[docs]</a>
+<span class="k">class</span> <span class="nc">AirflowEnvironmentStack</span><span class="p">(</span><span class="n">Stack</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">_zip_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">,</span> <span class="n">zip_path</span><span class="p">):</span>
+        <span class="n">zipf</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">lendir_path</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+                <span class="n">zipf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_path</span><span class="p">[</span><span class="n">lendir_path</span><span class="p">:])</span>
+        <span class="n">zipf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<div class="viewcode-block" id="AirflowEnvironmentStack.__init__">
+<a class="viewcode-back" href="../../../../../dif.stacks.airflow_env.nested_stacks.html#dif.stacks.airflow_env.nested_stacks.environment.AirflowEnvironmentStack.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">scope</span><span class="p">:</span> <span class="n">Construct</span><span class="p">,</span>
+        <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">vpc</span><span class="p">:</span> <span class="n">ec2</span><span class="o">.</span><span class="n">IVpc</span><span class="p">,</span>
+        <span class="n">subnet_ids_list</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_tags</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">max_workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">access_mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">secrets_backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cicd_bucket</span><span class="p">:</span> <span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>
+        <span class="n">datadocs_bucket</span><span class="p">:</span> <span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">env_name</span> <span class="o">=</span> <span class="n">env_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span> <span class="o">=</span> <span class="n">cicd_bucket</span> 
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span> <span class="o">=</span> <span class="n">datadocs_bucket</span>
+
+       
+
+        <span class="c1"># Create MWAA role</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">Role</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-mwaa-role&quot;</span><span class="p">,</span>
+            <span class="n">role_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">_mwaa_role&quot;</span><span class="p">,</span>
+            <span class="n">assumed_by</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">ServicePrincipal</span><span class="p">(</span><span class="s2">&quot;airflow-env.amazonaws.com&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:airflow:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="si">}</span><span class="s2">:environment/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;airflow:PublishMetrics&quot;</span><span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span><span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                       <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:instance-profile/EMR_EC2_DefaultRole&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;iam:GetInstanceProfile&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;iam:CreateInstanceProfile&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;iam:AddRoleToInstanceProfile&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+        <span class="p">))</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span>                    
+                    
+                <span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:ListAllMyBuckets&quot;</span><span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">DENY</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span>
+                <span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:GetObject*&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:GetBucket*&quot;</span><span class="p">,</span> <span class="s2">&quot;s3:List*&quot;</span><span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;arn:aws:logs:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="si">}</span><span class="s2">:log-group:airflow-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">-*&quot;</span>
+                <span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                    <span class="s2">&quot;logs:CreateLogStream&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:CreateLogGroup&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:PutLogEvents&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:GetLogEvents&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:GetLogRecord&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:GetLogGroupFields&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:GetQueryResults&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;logs:DescribeLogGroups&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># role.add_to_policy(</span>
+        <span class="c1">#     iam.PolicyStatement(</span>
+        <span class="c1">#         resources=[&quot;*&quot;],</span>
+        <span class="c1">#         actions=[&quot;cloudwatch:PutMetricData&quot;],</span>
+        <span class="c1">#         effect=iam.Effect.ALLOW,</span>
+        <span class="c1">#     )</span>
+        <span class="c1"># )</span>
+
+        <span class="c1"># role.add_to_policy(</span>
+        <span class="c1">#     iam.PolicyStatement(</span>
+        <span class="c1">#         principals=[iam.ServicePrincipal(&quot;airflow-env.amazonaws.com&quot;)],</span>
+        <span class="c1">#         actions=[&quot;sts:AssumeRole&quot;],</span>
+        <span class="c1">#         effect=iam.Effect.ALLOW,</span>
+        <span class="c1">#     )</span>
+        <span class="c1"># )</span>
+
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;arn:aws:sqs:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">:*:airflow-celery-*&quot;</span><span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                    <span class="s2">&quot;sqs:ChangeMessageVisibility&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sqs:DeleteMessage&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sqs:GetQueueAttributes&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sqs:GetQueueUrl&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sqs:ReceiveMessage&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sqs:SendMessage&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span> 
+                                <span class="n">actions</span><span class="o">=</span> <span class="p">[</span>
+                                    <span class="s2">&quot;ec2:DescribeSubnets&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;ec2:DescribeVpcs&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;ec2:DescribeSecurityGroups&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;ec2:CreateSecurityGroup&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;ec2:AuthorizeSecurityGroupIngress&quot;</span><span class="p">],</span>
+                                <span class="n">resources</span><span class="o">=</span>
+                                <span class="p">[</span><span class="n">vpc</span><span class="o">.</span><span class="n">vpc_arn</span><span class="p">]</span><span class="o">+</span>
+                                <span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;arn:aws:ec2:</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">REGION</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:subnet/</span><span class="si">{</span><span class="n">subnet</span><span class="o">.</span><span class="n">subnet_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">subnet</span> <span class="ow">in</span> <span class="n">vpc</span><span class="o">.</span><span class="n">private_subnets</span><span class="o">+</span><span class="n">vpc</span><span class="o">.</span><span class="n">isolated_subnets</span><span class="o">+</span><span class="n">vpc</span><span class="o">.</span><span class="n">public_subnets</span><span class="p">]</span><span class="o">+</span>
+                                <span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;arn:aws:ec2:</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">REGION</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:security-group/emr-jobflow-thrift&quot;</span> <span class="p">]</span>
+                                <span class="p">,</span>
+                                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+                
+            <span class="p">)</span>
+            
+        <span class="p">)</span>
+        
+        <span class="c1">##Only allow RunJobFlow when project tag is same as project id</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span><span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+           <span class="n">actions</span><span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;elasticmapreduce:RunJobFlow&quot;</span><span class="p">],</span>
+           <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+           <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+        <span class="p">))</span>
+        
+        
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span> 
+                                <span class="n">actions</span><span class="o">=</span> <span class="p">[</span>
+                                    <span class="s2">&quot;elasticmapreduce:TerminateJobFlows&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;elasticmapreduce:AddTags&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;elasticmapreduce:DescribeCluster&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;elasticmapreduce:AddJobFlowSteps&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;elasticmapreduce:DescribeStep&quot;</span>
+                                <span class="p">],</span>
+                                <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+                                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+                
+            <span class="p">)</span>
+            
+        <span class="p">)</span>
+        <span class="n">NagSuppressions</span><span class="o">.</span><span class="n">add_resource_suppressions</span><span class="p">(</span><span class="n">role</span><span class="p">,[</span>
+                                                <span class="p">{</span>
+                                                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;AwsSolutions-IAM5&#39;</span><span class="p">,</span>
+                                                    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;RunJobFlow can create job flow cluster only when request project tag is set as &quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s1">&quot;. Rest of action can only be done when cluster has the project resource tag set as &quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">,</span>
+                                                    <span class="s2">&quot;appliesTo&quot;</span><span class="p">:[</span><span class="s2">&quot;Resource::*&quot;</span><span class="p">]</span>
+                                                <span class="p">}</span>
+                                            <span class="p">],</span> <span class="n">apply_to_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span> 
+                                <span class="n">actions</span><span class="o">=</span> <span class="p">[</span>
+                                    <span class="s2">&quot;iam:PassRole&quot;</span><span class="p">,</span>				
+                                    <span class="s2">&quot;iam:GetRole&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;iam:CreateRole&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;iam:AttachRolePolicy&quot;</span>
+                                <span class="p">],</span>
+                                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                    <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:role/EMR_DefaultRole&quot;</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:role/EMR_EC2_DefaultRole&quot;</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">Aws</span><span class="o">.</span><span class="n">ACCOUNT_ID</span><span class="si">}</span><span class="s2">:role/EMR_AutoScaling_DefaultRole&quot;</span>
+			                    <span class="p">],</span>
+                                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+                
+            <span class="p">)</span>
+            
+        <span class="p">)</span>
+        
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span> 
+                                <span class="n">actions</span><span class="o">=</span> <span class="p">[</span>
+                                    <span class="s2">&quot;iam:CreateServiceLinkedRole&quot;</span><span class="p">,</span>
+				                    <span class="s2">&quot;iam:PutRolePolicy&quot;</span>
+                                <span class="p">],</span>
+                                <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                                    <span class="s2">&quot;arn:aws:iam::*:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*&quot;</span>
+			                    <span class="p">],</span>
+                                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+                
+            <span class="p">)</span>
+            
+        <span class="p">)</span>
+        
+        
+        <span class="c1"># Create MWAA user policy</span>
+        <span class="n">managed_policy</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">ManagedPolicy</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-mwaa-user-policy&quot;</span><span class="p">,</span>
+            <span class="n">managed_policy_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-mwaa-user-policy&quot;</span><span class="p">,</span>
+            <span class="n">statements</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:airflow:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="si">}</span><span class="s2">:role/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">/Op&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;airflow:CreateWebLoginToken&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:airflow:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="si">}</span><span class="s2">:environment/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;airflow:GetEnvironment&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;airflow:ListEnvironments&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/dags/*&quot;</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforAutoScalingRole&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;iam:GetPolicy&quot;</span><span class="p">,</span><span class="s2">&quot;iam:GetPolicyVersion&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span><span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceRole&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforAutoScalingRole&quot;</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ec2:DescribeSubnets&quot;</span><span class="p">,</span><span class="s2">&quot;iam:GetPolicyVersion&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+                
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/dags/*&quot;</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s2">&quot;arn:aws:s3:::</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/*&quot;</span>
+
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_managed_policy</span><span class="p">(</span><span class="n">managed_policy</span><span class="p">)</span>
+        
+        <span class="n">nag_suppress_s3_resources</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;Resource::arn:aws:s3:::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;/*&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Resource::arn:aws:s3:::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;/*&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Resource::arn:aws:logs:&lt;AWS::Region&gt;:&lt;AWS::AccountId&gt;:log-group:airflow-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">-*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource::arn:aws:sqs:&lt;AWS::Region&gt;:*:airflow-celery-*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource::arn:aws:iam::*:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;arn:aws:iam::*:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource::arn:aws:secretsmanager:*:*:airflow/connections/*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource::arn:aws:secretsmanager:*:*:airflow/variables/*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action::kms:GenerateDataKey*&quot;</span><span class="p">,</span>
+            
+           
+        <span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">,</span><span class="n">nag_suppress_s3_resources</span><span class="p">)</span>
+        
+        <span class="n">NagSuppressions</span><span class="o">.</span><span class="n">add_resource_suppressions</span><span class="p">(</span><span class="n">role</span><span class="p">,[</span>
+                                                        <span class="p">{</span>
+                                                            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;AwsSolutions-IAM5&#39;</span><span class="p">,</span>
+                                                            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s1">&#39;Airflow needs access to CICD Bucket, Data Documentation Bucket and all it&#39;&#39;s folders&#39;</span><span class="p">,</span>
+                                                            <span class="s2">&quot;appliesTo&quot;</span><span class="p">:</span><span class="n">nag_suppress_s3_resources</span>
+                                                        <span class="p">}</span>
+                                                    <span class="p">],</span> <span class="n">apply_to_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">nag_suppress_user_policy_resources</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Resource::arn:aws:s3:::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">datadocs_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;/*&quot;</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;Resource::arn:aws:s3:::&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_logical_id</span><span class="p">(</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">default_child</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;/dags/*&quot;</span><span class="p">,</span><span class="s2">&quot;Resource::*&quot;</span><span class="p">]</span>
+        <span class="n">NagSuppressions</span><span class="o">.</span><span class="n">add_resource_suppressions</span><span class="p">(</span><span class="n">managed_policy</span><span class="p">,[</span>
+                                                        <span class="p">{</span>
+                                                            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;AwsSolutions-IAM5&#39;</span><span class="p">,</span>
+                                                            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s1">&#39;Airflow needs access to data docs and dags folder. It also needs to be able to list environments&#39;</span><span class="p">,</span>
+                                                            <span class="s2">&quot;appliesTo&quot;</span><span class="p">:</span><span class="n">nag_suppress_user_policy_resources</span>
+                                                        <span class="p">}</span>
+                                                    <span class="p">],</span> <span class="n">apply_to_children</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">secrets_backend</span> <span class="o">==</span> <span class="s2">&quot;SecretsManager&quot;</span><span class="p">:</span>
+            <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+                <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                    <span class="n">resources</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;arn:aws:secretsmanager:*:*:airflow/connections/*&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;arn:aws:secretsmanager:*:*:airflow/variables/*&quot;</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                        <span class="s2">&quot;secretsmanager:DescribeSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:PutSecretValue&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:CreateSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:DeleteSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:CancelRotateSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:ListSecretVersionIds&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:UpdateSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:GetRandomPassword&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:GetResourcePolicy&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:GetSecretValue&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:StopReplicationToReplica&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:ReplicateSecretToRegions&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:RestoreSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:RotateSecret&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:UpdateSecretVersionStage&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:RemoveRegionsFromReplication&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;secretsmanager:ListSecrets&quot;</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="n">string_like</span> <span class="o">=</span> <span class="n">CfnJson</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;ConditionJson&quot;</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="sa">f</span><span class="s2">&quot;kms:ViaService&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;sqs.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">.amazonaws.com&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">add_to_policy</span><span class="p">(</span>
+            <span class="n">iam</span><span class="o">.</span><span class="n">PolicyStatement</span><span class="p">(</span>
+                <span class="n">not_resources</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;arn:aws:kms:*:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="si">}</span><span class="s2">:key/*&quot;</span><span class="p">],</span>
+                <span class="n">actions</span><span class="o">=</span><span class="p">[</span>
+                    <span class="s2">&quot;kms:Decrypt&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;kms:DescribeKey&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;kms:GenerateDataKey*&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;kms:Encrypt&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="n">effect</span><span class="o">=</span><span class="n">iam</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">ALLOW</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        
+
+
+        <span class="n">plugins_zip</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s2">&quot;../assets/plugins.zip&quot;</span><span class="p">)</span>
+        <span class="n">plugins_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s2">&quot;../assets/plugins&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zip_dir</span><span class="p">(</span><span class="n">plugins_path</span><span class="p">,</span> <span class="n">plugins_zip</span><span class="p">)</span>
+
+        <span class="c1"># Upload MWAA pre-reqs</span>
+        <span class="n">plugins_deploy</span> <span class="o">=</span> <span class="n">BucketDeployment</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;DeployPlugin&quot;</span><span class="p">,</span>
+            <span class="n">sources</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">s3deploy</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">asset</span><span class="p">(</span>
+                   <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s2">&quot;../assets&quot;</span><span class="p">)</span> <span class="p">,</span>
+                    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;!plugins.zip&quot;</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">destination_bucket</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="p">,</span>
+            <span class="n">destination_key_prefix</span><span class="o">=</span><span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
+            <span class="n">retain_on_delete</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">req_deploy</span> <span class="o">=</span> <span class="n">BucketDeployment</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;DeployReq&quot;</span><span class="p">,</span>
+            <span class="n">sources</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">s3deploy</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">asset</span><span class="p">(</span>
+                    <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s2">&quot;../assets&quot;</span><span class="p">),</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;!requirements.txt&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">destination_bucket</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="p">,</span>
+            <span class="n">destination_key_prefix</span><span class="o">=</span><span class="s2">&quot;requirements&quot;</span><span class="p">,</span>
+            <span class="n">retain_on_delete</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">startup_deploy</span> <span class="o">=</span> <span class="n">BucketDeployment</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;DeployStartup&quot;</span><span class="p">,</span>
+            <span class="n">sources</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">s3deploy</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">asset</span><span class="p">(</span>
+                    <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span><span class="s2">&quot;../assets&quot;</span><span class="p">),</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;**&quot;</span><span class="p">,</span> <span class="s2">&quot;!startup.sh&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">destination_bucket</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="p">,</span>
+            <span class="n">destination_key_prefix</span><span class="o">=</span><span class="s2">&quot;startup&quot;</span><span class="p">,</span>
+            <span class="n">retain_on_delete</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="c1"># Create security group</span>
+        <span class="n">mwaa_sg</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">SecurityGroup</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;SecurityGroup&quot;</span><span class="p">,</span>
+            <span class="n">vpc</span><span class="o">=</span><span class="n">vpc</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Allow inbound access to MWAA&quot;</span><span class="p">,</span>
+            <span class="n">allow_all_outbound</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mwaa_sg</span><span class="o">.</span><span class="n">add_ingress_rule</span><span class="p">(</span>
+            <span class="n">mwaa_sg</span><span class="p">,</span> <span class="n">ec2</span><span class="o">.</span><span class="n">Port</span><span class="o">.</span><span class="n">all_traffic</span><span class="p">(),</span> <span class="s2">&quot;allow inbound access from the SG&quot;</span>
+        <span class="p">)</span>
+        
+        <span class="n">mwaa_sg</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">allow_internally</span><span class="p">(</span><span class="n">ec2</span><span class="o">.</span><span class="n">Port</span><span class="o">.</span><span class="n">all_traffic</span><span class="p">(),</span> <span class="s2">&quot;within MWAA&quot;</span><span class="p">)</span>
+        
+         <span class="c1"># marquez lineage sg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lineage_sg</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">SecurityGroup</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> 
+            <span class="s2">&quot;lineage_sg&quot;</span><span class="p">,</span> 
+            <span class="n">vpc</span><span class="o">=</span><span class="n">vpc</span><span class="p">,</span> 
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;OpenLineage instance sg&quot;</span>
+        <span class="p">)</span>
+        
+        <span class="n">EXTERNAL_IP</span> <span class="o">=</span> <span class="s2">&quot;255.255.255.255&quot;</span>        
+        <span class="c1"># Open port 22 for SSH</span>
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lineage_sg</span><span class="o">.</span><span class="n">add_ingress_rule</span><span class="p">(</span>
+                <span class="n">ec2</span><span class="o">.</span><span class="n">Peer</span><span class="o">.</span><span class="n">ipv4</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">EXTERNAL_IP</span><span class="si">}</span><span class="s2">/32&quot;</span><span class="p">),</span>
+                <span class="n">ec2</span><span class="o">.</span><span class="n">Port</span><span class="o">.</span><span class="n">tcp</span><span class="p">(</span><span class="n">port</span><span class="p">),</span>
+                <span class="s2">&quot;Lineage from external ip&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">lineage_sg</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">allow_from</span><span class="p">(</span><span class="n">mwaa_sg</span><span class="p">,</span> <span class="n">ec2</span><span class="o">.</span><span class="n">Port</span><span class="o">.</span><span class="n">tcp</span><span class="p">(</span><span class="mi">5000</span><span class="p">))</span>
+
+        <span class="c1"># Get private subnets</span>
+        <span class="n">subnet_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_subnet_ids</span><span class="p">(</span><span class="n">vpc</span><span class="p">,</span> <span class="n">subnet_ids_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">env_tags</span><span class="p">:</span>
+            <span class="n">env_tags</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">env_tags</span><span class="p">)</span>
+
+        <span class="n">mwaa_env</span> <span class="o">=</span> <span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;MWAAEnv</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_id</span><span class="si">}</span><span class="s2">-mwaa-environment&quot;</span><span class="p">,</span>
+            <span class="n">dag_s3_path</span><span class="o">=</span><span class="s2">&quot;dags&quot;</span><span class="p">,</span>
+            <span class="n">airflow_version</span><span class="o">=</span><span class="s2">&quot;2.6.3&quot;</span><span class="p">,</span>
+            <span class="n">environment_class</span><span class="o">=</span><span class="n">env_class</span><span class="p">,</span>
+            <span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span><span class="p">,</span>
+            <span class="n">execution_role_arn</span><span class="o">=</span><span class="n">role</span><span class="o">.</span><span class="n">role_arn</span><span class="p">,</span>
+            <span class="n">logging_configuration</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">LoggingConfigurationProperty</span><span class="p">(</span>
+                <span class="n">dag_processing_logs</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">ModuleLoggingConfigurationProperty</span><span class="p">(</span>
+                    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+                <span class="p">),</span>
+                <span class="n">scheduler_logs</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">ModuleLoggingConfigurationProperty</span><span class="p">(</span>
+                    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+                <span class="p">),</span>
+                <span class="n">task_logs</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">ModuleLoggingConfigurationProperty</span><span class="p">(</span>
+                    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+                <span class="p">),</span>
+                <span class="n">webserver_logs</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">ModuleLoggingConfigurationProperty</span><span class="p">(</span>
+                    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+                <span class="p">),</span>
+                <span class="n">worker_logs</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">ModuleLoggingConfigurationProperty</span><span class="p">(</span>
+                    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+                <span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">network_configuration</span><span class="o">=</span><span class="n">mwaa</span><span class="o">.</span><span class="n">CfnEnvironment</span><span class="o">.</span><span class="n">NetworkConfigurationProperty</span><span class="p">(</span>
+                <span class="n">security_group_ids</span><span class="o">=</span><span class="p">[</span><span class="n">mwaa_sg</span><span class="o">.</span><span class="n">security_group_id</span><span class="p">],</span> <span class="n">subnet_ids</span><span class="o">=</span><span class="n">subnet_ids</span>
+            <span class="p">),</span>
+            <span class="n">plugins_s3_path</span><span class="o">=</span><span class="s2">&quot;plugins/plugins.zip&quot;</span><span class="p">,</span>
+            <span class="n">requirements_s3_path</span><span class="o">=</span><span class="s2">&quot;requirements/requirements.txt&quot;</span><span class="p">,</span>
+            <span class="n">startup_script_s3_path</span><span class="o">=</span><span class="s2">&quot;startup/startup.sh&quot;</span><span class="p">,</span>
+            <span class="n">source_bucket_arn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="o">.</span><span class="n">bucket_arn</span><span class="p">,</span>
+            <span class="n">webserver_access_mode</span><span class="o">=</span><span class="n">access_mode</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;project&quot;</span><span class="p">:</span><span class="n">project_id</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;core.lazy_load_plugins&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">secrets_backend</span> <span class="o">==</span> <span class="s2">&quot;SecretsManager&quot;</span><span class="p">:</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;secrets.backend&quot;</span><span class="p">:</span> <span class="s2">&quot;airflow.contrib.secrets.aws_secrets_manager.SecretsManagerBackend&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;secrets.backend_kwargs&quot;</span><span class="p">:</span> <span class="s1">&#39;{&quot;connections_prefix&quot; : &quot;airflow/connections&quot;, &quot;variables_prefix&quot; : &quot;airflow/variables&quot;}&#39;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="n">mwaa_env</span><span class="o">.</span><span class="n">add_override</span><span class="p">(</span><span class="s2">&quot;Properties.AirflowConfigurationOptions&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+        <span class="n">mwaa_env</span><span class="o">.</span><span class="n">add_override</span><span class="p">(</span><span class="s2">&quot;Properties.Tags&quot;</span><span class="p">,</span> <span class="n">env_tags</span><span class="p">)</span>
+        <span class="n">mwaa_env</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">add_dependency</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cicd_bucket</span><span class="p">)</span>
+        <span class="n">mwaa_env</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">add_dependency</span><span class="p">(</span><span class="n">plugins_deploy</span><span class="p">)</span>
+        <span class="n">mwaa_env</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">add_dependency</span><span class="p">(</span><span class="n">req_deploy</span><span class="p">)</span>
+        <span class="n">CfnOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;MWAA_NAME&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env_name</span><span class="p">)</span>
+        <span class="n">CfnOutput</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;user-custom-policy&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">managed_policy</span><span class="o">.</span><span class="n">managed_policy_arn</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AirflowEnvironmentStack.get_subnet_ids">
+<a class="viewcode-back" href="../../../../../dif.stacks.airflow_env.nested_stacks.html#dif.stacks.airflow_env.nested_stacks.environment.AirflowEnvironmentStack.get_subnet_ids">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_subnet_ids</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vpc</span><span class="p">,</span> <span class="n">subnet_ids_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">subnet_ids_list</span><span class="p">:</span>
+            <span class="n">subnet_ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">subnets</span> <span class="o">=</span> <span class="n">vpc</span><span class="o">.</span><span class="n">select_subnets</span><span class="p">(</span><span class="n">subnet_type</span><span class="o">=</span><span class="n">ec2</span><span class="o">.</span><span class="n">SubnetType</span><span class="o">.</span><span class="n">PRIVATE_WITH_EGRESS</span><span class="p">)</span><span class="o">.</span><span class="n">subnets</span>
+            <span class="n">first_subnet</span> <span class="o">=</span> <span class="n">subnets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">subnet_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_subnet</span><span class="o">.</span><span class="n">subnet_id</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subnets</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">availability_zone</span> <span class="o">!=</span> <span class="n">first_subnet</span><span class="o">.</span><span class="n">availability_zone</span><span class="p">:</span>
+                    <span class="n">subnet_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">subnet_id</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">subnet_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">subnet_ids_list</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">subnet_ids</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Shishir Chandra Choudhary.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

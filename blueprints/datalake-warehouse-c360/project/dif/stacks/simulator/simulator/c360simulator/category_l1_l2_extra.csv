@@ -1,0 +1,86 @@
+category_l1,category_l2,similar
+accessories,backpack,travel:0.4;jacket:0.3;shirt:0.2;scarf:0.2
+accessories,bag,handbag:04;scarf:0.4;grooming:0.3;bathing:0.2
+accessories,belt,handbag:04;scarf:0.4;grooming:0.3;bathing:0.2
+accessories,glasses,handbag:04;scarf:0.4;grooming:0.3;bathing:0.2
+accessories,handbag,bag:04;scarf:0.4;grooming:0.3;bathing:0.2;earrings:0.3;bracelet:0.3;necklace:0.2
+accessories,watch,travel:0.4;jacket:0.3;shirt:0.2;scarf:0.2
+apparel,jacket,travel:0.4;jacket:0.3;shirt:0.2;scarf:0.2
+apparel,scarf,handbag:04;scarf:0.4;grooming:0.3;bathing:0.2
+apparel,shirt,travel:0.4;jacket:0.3;shirt:0.2;scarf:0.2
+apparel,socks,boot:0.4;sneaker:0.4;formal:0.3;sandals:0.2;camping:0.2;fishing:0.2;kayaking:0.2
+beauty,bathing,grooming:0.4;bag:0.3
+beauty,grooming,bathing:0.4;handbag:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+books,cooking,meat:0.4;vegetables:0.3;christmas:0.2;easter:0.2
+books,travel,boot:0.4;sneaker:0.4;camping:0.3;fishing:0.3;kayaking:02
+cold dispensed,fountain-carbonated,fountain-non-carbonated:0.4;pizza:0.3;nachos:0.2;nuts/seeds:0.3;potato chips:0.4
+cold dispensed,fountain-non-carbonated,fountain-carbonated:0.4;pizza:0.3;nachos:0.2;nuts/seeds:0.3;potato chips:0.4
+electronics,cable,computer:0.4;speaker:0.4;travel:0.2;camera:0.2
+electronics,camera,cable:0.3
+electronics,computer,cable:0.4;keyboard:0.3;headphones:0.3;speaker:0.2
+electronics,headphones,computer
+electronics,keyboard,computer:0.3;speaker:0.2;headphones:0.2
+electronics,speaker,computer:0.3;television:0.3
+electronics,television,speaker:0.4;cable:0.4
+floral,arrangement,grooming:0.4;bathing:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+floral,bouquet,grooming:0.4;bathing:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+floral,centerpiece,grooming:0.4;bathing:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+floral,plant,grooming:0.4;bathing:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+floral,wreath,grooming:0.4;bathing:0.3;earrings:0.3;bracelet:0.3;necklace:0.2
+food service,nachos,fountain-carbonated:0.4;pizza:0.4;sandwiches:0.3;fountain-non-carbonated:0.3;soup and salad:0.2
+food service,other cuisine,fountain-carbonated:0.4;pizza:0.4;sandwiches:0.3;fountain-non-carbonated:0.3;soup and salad:0.2
+food service,pizza,fountain-carbonated:0.4;nachos:0.3;sandwiches:0.3;fountain-non-carbonated:0.3;soup and salad:0.2
+food service,sandwiches,soup and salad:0.2
+food service,seafood,fountain-carbonated:0.4;nachos:0.3;sandwiches:0.3;fountain-non-carbonated:0.3;soup and salad:0.2
+food service,soup and salad,sandwiches:0.4
+footwear,boot,camping:0.3;fishing:0.3;kayaking:0.3
+footwear,formal,shirt:0.4
+footwear,sandals,camping:0.2;fishing:0.2;kayaking:0.2
+footwear,sneaker,camping:0.2;fishing:0.2;kayaking:0.2
+furniture,chairs,sofas:0.4;tables:0.4;dressers:0.3
+furniture,dressers,chairs:0.4;tables:0.3;sofas:0.2
+furniture,sofas,tables:0.4;chairs:0.3
+furniture,tables,chairs:0.5;sofas:0.3
+groceries,bakery,dairy:0.4;meat:0.3
+groceries,dairy,bakery:0.3;meat:0.3
+groceries,fruits,meat:0.3
+groceries,meat,fruits:0.3;dairy:0.3;bakery:0.2
+groceries,seafood,fountain-carbonated:0.3;fountain-non-carbonated:0.2;vegetables:0.2
+groceries,vegetables,seafood:0.3
+homedecor,bedroom,cushion:0.4;decorative:0.4;lighting:0.4;clock:0.3;handbag:0.3
+homedecor,clock,cushion:0.4;decorative:0.4;lighting:0.4;clock:0.3;handbag:0.3
+homedecor,cushion,bedroom:0.4;decorative:0.4;lighting:0.4;clock:0.3;handbag:0.3
+homedecor,decorative,cushion:0.4;decorative:0.4;lighting:0.4;clock:0.3;handbag:0.3
+homedecor,lighting,cushion:0.4;decorative:0.4;cushion:0.4;clock:0.3;handbag:0.3
+hot dispensed,hot chocolate,fountain-non-carbonated:0.4;fountain-carbonated:0.2
+housewares,bowls,consumable:0.4;kitchen:0.3;salon:0.2;camping:0.3;kayaking:0.3;fishing:0.3
+housewares,consumable,bowls:0.4;kitchen:0.3;salon:0.2;camping:0.3;kayaking:0.3;fishing:0.3
+housewares,kitchen,consumable:0.4;kitchen:0.3;salon:0.2;camping:0.3;kayaking:0.3;fishing:0.3
+housewares,salon,consumable:0.4;kitchen:0.3;salon:0.2;camping:0.3;kayaking:0.3;fishing:0.3
+instruments,keys,strings:0.4;percussion:0.3;microphone:0.2
+instruments,microphone,strings:0.3;keys:0.3
+instruments,percussion,strings:0.2;keys:0.2
+instruments,strings,keys:0.4;microphone:0.3;wind:0.2
+instruments,wind,strings:0.4;microphone:0.3
+jewelry,bracelet,earrings:0.4;necklace:0.3;handbag:0.3;grooming:0.3;bathing:0.2
+jewelry,earrings,bracelet:0.4;necklace:0.3;handbag:0.3;grooming:0.3;bathing:0.2
+jewelry,necklace,earrings:0.4;bracelet:0.3;handbag:0.3;grooming:0.3;bathing:0.2
+outdoors,camping,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+outdoors,fishing,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+outdoors,kayaking,fountain-carbonated:0.4;fountain-non-carbonated:0.3
+outdoors,pet,fishing:0.3
+salty snacks,nuts/seeds,fountain-carbonated:0.4;fountain-non-carbonated:0.3;pizza:0.3;nachos:0.2
+salty snacks,potato chips,fountain-carbonated:0.4;fountain-non-carbonated:0.3;pizza:0.3;nachos:0.2
+seasonal,christmas,halloween:0.3
+seasonal,easter,christmas:0.3
+seasonal,halloween,christmas:0.3
+seasonal,valentine,potato chips:0.4;fountain-carbonated:0.4;fountain-non-carbonated:0.3;pizza:0.3;nachos:0.2
+tools,axe,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,drill,axe:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,hammer,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,knife,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,plier,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,saw,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,screwdriver,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,set,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
+tools,wrench,drill:0.3;fountain-carbonated:0.4;fountain-non-carbonated:0.3;set:0.3;axe:0.2 
