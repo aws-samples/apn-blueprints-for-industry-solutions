@@ -1,1 +1,0 @@
-select * from {{ref('mkt_sls_table')}}

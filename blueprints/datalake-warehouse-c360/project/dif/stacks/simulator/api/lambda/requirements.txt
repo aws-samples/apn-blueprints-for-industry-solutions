@@ -1,4 +1,0 @@
-opensearch-py
-aws-lambda-powertools
-PyMySQL
-urllib3<2
