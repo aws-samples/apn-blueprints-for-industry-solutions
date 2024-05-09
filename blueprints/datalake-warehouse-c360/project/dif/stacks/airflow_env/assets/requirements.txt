@@ -1,0 +1,17 @@
+--constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.3/constraints-3.10.txt"
+
+apache-airflow==2.6.3
+apache-airflow-providers-salesforce
+apache-airflow-providers-apache-spark
+apache-airflow-providers-amazon
+apache-airflow-providers-postgres
+apache-airflow-providers-mongo
+apache-airflow-providers-ssh
+apache-airflow-providers-common-sql
+astronomer-cosmos
+boto3
+simplejson
+pymongo
+pymssql
+smart-open
+simple-salesforce

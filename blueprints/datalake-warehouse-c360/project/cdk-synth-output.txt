@@ -1,0 +1,183 @@
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:s3:::<corecicdbucketA60C83E4>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::<corecicdbucketA60C83E4>/*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:s3:::<coredatadocsbucketFE533C4B>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::<coredatadocsbucketFE533C4B>/*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:logs:<AWS::Region>:<AWS::AccountId>:log-group:airflow-*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:logs:<AWS::Region>:<AWS::AccountId>:log-group:airflow-*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:sqs:<AWS::Region>:*:airflow-celery-*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:sqs:<AWS::Region>:*:airflow-celery-*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::*] RunJobFlow can create job flow cluster only when request project tag is set as "core". Rest of action can only be done when cluster has the project resource tag set as "core""
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:iam::*:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:iam::*:role/aws-service-role/elasticmapreduce.amazonaws.com*/AWSServiceRoleForEMRCleanup*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:secretsmanager:*:*:airflow/connections/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:secretsmanager:*:*:airflow/connections/*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:aws:secretsmanager:*:*:airflow/variables/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:secretsmanager:*:*:airflow/variables/*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-role/DefaultPolicy/Resource] CdkNagSuppression[Action::kms:GenerateDataKey*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::kms:GenerateDataKey*] Airflow needs access to CICD Bucket, Data Documentation Bucket and all its folders"
+
+[Info at /core-mwaa/core-mwaa-user-policy/Resource] CdkNagSuppression[Resource::*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::*] Airflow needs access to data docs and dags folder. It also needs to be able to list environments"
+
+[Info at /core-mwaa/core-mwaa-user-policy/Resource] CdkNagSuppression[Resource::arn:aws:s3:::<corecicdbucketA60C83E4>/dags/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::<corecicdbucketA60C83E4>/dags/*] Airflow needs access to data docs and dags folder. It also needs to be able to list environments"
+
+[Info at /core-mwaa/core-mwaa-user-policy/Resource] CdkNagSuppression[Resource::arn:aws:s3:::<coredatadocsbucketFE533C4B>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::<coredatadocsbucketFE533C4B>/*] Airflow needs access to data docs and dags folder. It also needs to be able to list environments"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource] CdkNagSuppression[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole]: AwsSolutions-IAM4 was triggered but suppressed. Provided reason: "[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:<AWS::Partition>:s3:::cdk-hnb659fds-assets-<AWS::AccountId>-<AWS::Region>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:<AWS::Partition>:s3:::cdk-hnb659fds-assets-<AWS::AccountId>-<AWS::Region>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:DeleteObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:DeleteObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:Abort*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Abort*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::<corecicdbucketA60C83E4.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corecicdbucketA60C83E4.Arn>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-mwaa/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource] CdkNagSuppression: AwsSolutions-L1 was triggered but suppressed. Provided reason: "Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[33m[Warning at /core-mwaa/SecurityGroup] Ignoring Egress rule since 'allowAllOutbound' is set to true; To add customized rules, set allowAllOutbound=false on the SecurityGroup [ack: @aws-cdk/aws-ec2:ipv4IgnoreEgressRule][39m
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Action::s3:*Object]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:*Object] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Action::s3:Get*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Get*] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Resource::<corebronzebucket0223987E.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corebronzebucket0223987E.Arn>/*] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Resource::<coresilverproject9B52D277.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coresilverproject9B52D277.Arn>/*] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/c360-notebook-role/Resource] CdkNagSuppression[Resource::arn:aws:s3:::aws-glue-assets-<AWS::AccountId>-<AWS::Region>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::aws-glue-assets-<AWS::AccountId>-<AWS::Region>/*] EMR Notebook Role Can Only Operate on Project Buckets and Project Databases"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource] CdkNagSuppression[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole]: AwsSolutions-IAM4 was triggered but suppressed. Provided reason: "[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:<AWS::Partition>:s3:::cdk-hnb659fds-assets-<AWS::AccountId>-<AWS::Region>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:<AWS::Partition>:s3:::cdk-hnb659fds-assets-<AWS::AccountId>-<AWS::Region>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:DeleteObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:DeleteObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:Abort*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Abort*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::<corecicdbucketA60C83E4.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corecicdbucketA60C83E4.Arn>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource] CdkNagSuppression: AwsSolutions-L1 was triggered but suppressed. Provided reason: "Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::<corecicdbucketA60C83E4.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corecicdbucketA60C83E4.Arn>/*] Codebuild for ETL pipeline requires access to CICD bucket and log and report group"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:<AWS::Partition>:logs:<AWS::Region>:<AWS::AccountId>:log-group:/aws/codebuild/<coreetldeploytomwaabucket78933D17>:*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:<AWS::Partition>:logs:<AWS::Region>:<AWS::AccountId>:log-group:/aws/codebuild/<coreetldeploytomwaabucket78933D17>:*] Codebuild for ETL pipeline requires access to CICD bucket and log and report group"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Resource::arn:<AWS::Partition>:codebuild:<AWS::Region>:<AWS::AccountId>:report-group/<coreetldeploytomwaabucket78933D17>-*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:<AWS::Partition>:codebuild:<AWS::Region>:<AWS::AccountId>:report-group/<coreetldeploytomwaabucket78933D17>-*] Codebuild for ETL pipeline requires access to CICD bucket and log and report group"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::kms:ReEncrypt*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::kms:ReEncrypt*] Codebuild for ETL pipeline requires access to CICD bucket and log and report group"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::kms:GenerateDataKey*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::kms:GenerateDataKey*] Codebuild for ETL pipeline requires access to CICD bucket and log and report group"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:DeleteObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:DeleteObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-codebuild-role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:Abort*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Abort*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-deployto-mwaa-bucket/Resource] CdkNagSuppression: AwsSolutions-CB3 was triggered but suppressed. Provided reason: "Codebuild requires to build docker containers for lambda function python environment"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:DeleteObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:DeleteObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:Abort*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Abort*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Role/DefaultPolicy/Resource] CdkNagSuppression[Resource::<corecicdbucketA60C83E4.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corecicdbucketA60C83E4.Arn>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:GetBucket*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:GetBucket*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:List*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:List*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:DeleteObject*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:DeleteObject*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Action::s3:Abort*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Action::s3:Abort*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-etl/core-etl-pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::<corecicdbucketA60C83E4.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corecicdbucketA60C83E4.Arn>/*] Built in CDK construct. See issue https://github.com/aws/aws-cdk/issues/27210"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:ec2:*:*:network-interface/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:ec2:*:*:network-interface/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:ec2:*:*:instance/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:ec2:*:*:instance/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:ec2:*:*:security-group/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:ec2:*:*:security-group/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:ec2:*:*:vpc/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:ec2:*:*:vpc/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:ec2:*:*:subnet/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:ec2:*:*:subnet/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::arn:aws:secretsmanager:*:*:secret:*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:secretsmanager:*:*:secret:*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::<corebronzebucket0223987E.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corebronzebucket0223987E.Arn>/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::<coresilverproject9B52D277.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coresilverproject9B52D277.Arn>/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-studio-role/Resource] CdkNagSuppression[Resource::<coregoldproject570F523A.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coregoldproject570F523A.Arn>/*] Access is restricted conditionally to those resources with resource tags of either emr managed resources or "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:s3:::*.elasticmapreduce]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::*.elasticmapreduce] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:s3:::*.elasticmapreduce/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:s3:::*.elasticmapreduce/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::<corebronzebucket0223987E.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<corebronzebucket0223987E.Arn>/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::<coresilverproject9B52D277.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coresilverproject9B52D277.Arn>/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::<coregoldproject570F523A.Arn>/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coregoldproject570F523A.Arn>/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/default/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/default/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/corebronze/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/corebronze/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/coresilver/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/coresilver/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-emr/core-emr-serverless-job-run-role/Resource] CdkNagSuppression[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/coregold/*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::arn:aws:glue:<AWS::Region>:<AWS::AccountId>:table/coregold/*] Access to EMR service managed resources and "core" project resources"
+
+[Info at /core-redshift/RedshiftServerlessSecret/Resource] CdkNagSuppression: AwsSolutions-SMG4 was triggered but suppressed. Provided reason: "On Cloudformation Roadmap. See https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/1657 and https://github.com/aws/aws-cdk/issues/25755"
+
+[33m[Warning at /core-redshift/project-redshift-sg] Ignoring Egress rule since 'allowAllOutbound' is set to true; To add customized rules, set allowAllOutbound=false on the SecurityGroup [ack: @aws-cdk/aws-ec2:ipv4IgnoreEgressRule][39m
+[Info at /core-redshift/core-etl-cluster/Secret/Resource] CdkNagSuppression: AwsSolutions-SMG4 was triggered but suppressed. Provided reason: "On Cloudformation Roadmap. See https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/1657 and https://github.com/aws/aws-cdk/issues/25755"
+
+[Info at /core-redshift/core-etl-cluster/Resource] CdkNagSuppression: CdkNagValidationFailure was triggered but suppressed. CDK is unable to handle use of function as value for redshift secret which is valid approach to specify secret value securely 
+
+[Info at /core-redshift/core-etl-cluster/Resource] CdkNagSuppression: AwsSolutions-RS5 was triggered but suppressed. Provided reason: "On Cloudformation Roadmap. See https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/1657 and https://github.com/aws/aws-cdk/issues/25755"
+
+[Info at /core-redshift/core-redshift-post-deploy-code/core-redshift-post-deploy-lambda/ServiceRole/Resource] CdkNagSuppression[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole]: AwsSolutions-IAM4 was triggered but suppressed. Provided reason: "[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole] Built in CDK construct. Suppress AWSLambdaBasicExecutionRole. See https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/CustomResource.html  "
+
+[Info at /core-redshift/core-redshift-post-deploy-code/core-redshift_post_deploy_cr_provider/framework-onEvent/ServiceRole/Resource] CdkNagSuppression[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole]: AwsSolutions-IAM4 was triggered but suppressed. Provided reason: "[Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole] Built in CDK construct. Suppress AWSLambdaBasicExecutionRole. See https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/CustomResource.html  "
+
+[Info at /core-redshift/core-redshift-post-deploy-code/core-redshift_post_deploy_cr_provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource] CdkNagSuppression[Resource::<coreredshiftpostdeploycodecoreredshiftpostdeploylambda590304C3.Arn>:*]: AwsSolutions-IAM5 was triggered but suppressed. Provided reason: "[Resource::<coreredshiftpostdeploycodecoreredshiftpostdeploylambda590304C3.Arn>:*] Built in CDK construct.  See https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/CustomResource.html "
+
+[Info at /core-redshift/core-redshift-post-deploy-code/core-redshift_post_deploy_cr_provider/framework-onEvent/Resource] CdkNagSuppression: AwsSolutions-L1 was triggered but suppressed. Provided reason: "Built in CDK construct.  See https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/CustomResource.html"
+
+[32mSuccessfully synthesized to [34m/Users/ishishir/datalake-warehouse-accelerator/project/cdk.out[39m[32m[39m
+Supply a stack id ([32mcore-vpc[39m, [32mcore-lake[39m, [32mcore-mwaa[39m, [32mcore-etl[39m, [32mcore-emr[39m, [32mcore-redshift[39m) to display its template.
+
