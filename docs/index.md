@@ -1,6 +1,10 @@
-# AWS Industry Blueprints for Data & AI
+# APN Blueprints for Industry Solutions
 
-## What is AWS Industry Blueprints for Data & AI?
+## What is APN Blueprints?
+
+APN Blueprints offers a suite of building components, including Terraform, CDK code, CloudFormation templates, and solution accelerators, streamlining the configuration and deployment of tailored solutions across various industry verticals. Users can swiftly provision production-ready modern compute platforms, set up foundational data ingestion components or add customized ones for specific use cases. Additionally, the Blueprints incorporate ISV products with specialized capabilities to meet specific requirements of industries by customers (E.g. Data lineage component by Collibra; Data compliance component by Alation; CDP component by Tealium). Each blueprint provides prescriptive architecture guidance with componentized runnable technical artifacts, simplifying the development of industry-specific solutions with pattern-based definitions. 
+
+
 
 AWS Industry Blueprints for Data & AI offers a collection of building [`components`]('components.md'), including CDK code modules and solution accelerators to facilitate the configuration and deployment of tailored components for various industry verticals' data-to-insights needs. Users can swiftly set up foundational data ingestion pipeline or choose customized add-on components for specific use cases. Additionally, the Blueprints incorporate AWS technology partner ecosystem products with proprietary capabilities to meet specific requirements. This project simplifies the process of building industry solutions by providing pattern-based architectural definitions that developers can easily leverage.
 
