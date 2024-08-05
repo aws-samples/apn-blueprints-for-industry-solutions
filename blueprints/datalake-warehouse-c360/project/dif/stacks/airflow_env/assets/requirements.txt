@@ -1,6 +1,6 @@
 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.3/constraints-3.10.txt"
 
-apache-airflow==2.6.3
+apache-airflow==2.9.2
 apache-airflow-providers-salesforce
 apache-airflow-providers-apache-spark
 apache-airflow-providers-amazon
