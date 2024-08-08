@@ -9,33 +9,33 @@ nav:
   - Overview: 'index.md'
   - Componentized Mechanism: 'components.md'
   - Core Concepts: 'core_concepts.md'
-  - Industry Blueprints: 
+  - Industry Blueprints: 'comingsoon.md'
     - Advertising & Marketing:
-      - Customer 360:
-      - Campaigns and Journeys:
-      - Customer and User Support:
-      - Digital Content Creation:
-      - Retail Media:
-      - Agency Enablement:
-      - Measurement, Attribution and Verification:
-      - Consent management & data governance in AdTech:
-      - Data Cleanrooms:
-    - Automotive:
-    - Aerospace & Satelite: 
-    - Consumer Goods: 
-    - Energy & Utilities:
-    - Financial Services:
-    - Healthcare & Life Sciences:
-    - Manufacturing & Industrial:
-    - Media & Entertainment:
-    - Public Sector:
-    - Retail:
-    - Sports:
-    - Travel & Hospitality:
-    - Telecommunications: 
-  - Cross-industry Accelerators:
-    - Sustainability:
-    - Data & AI Cross-industry:
+      - Customer 360: 'https://github.com/aws-samples/aws-industry-blueprints-for-data-and-ai/tree/main/blueprints/datalake-warehouse-c360'
+      - Campaigns and Journeys: 'https://github.com/aws-samples/communication-developer-services-reference-architectures'
+      - Customer and User Support: 'comingsoon.md'
+      - Digital Content Creation: 'comingsoon.md'
+      - Retail Media: 'comingsoon.md'
+      - Agency Enablement: 'comingsoon.md'
+      - Measurement, Attribution and Verification: 'comingsoon.md'
+      - Consent management & data governance in AdTech: 'comingsoon.md'
+      - Data Cleanrooms: 'comingsoon.md'
+    - Automotive: 'comingsoon.md'
+    - Aerospace & Satelite: 'comingsoon.md'
+    - Consumer Goods: 'comingsoon.md'
+    - Energy & Utilities: 'comingsoon.md'
+    - Financial Services: 'comingsoon.md'
+    - Healthcare & Life Sciences: 'comingsoon.md'
+    - Manufacturing & Industrial: 'comingsoon.md'
+    - Media & Entertainment: 'comingsoon.md'
+    - Public Sector: 'comingsoon.md'
+    - Retail: 'comingsoon.md'
+    - Sports: 'comingsoon.md'
+    - Travel & Hospitality: 'comingsoon.md'
+    - Telecommunications: 'comingsoon.md'
+  - Cross-industry Accelerators: 'comingsoon.md'
+    - Sustainability: 'comingsoon.md'
+    - Data & AI Cross-industry: 'comingsoon.md'
   - Trainings: 'trainings.md'
   - Component request: 'request.md'
 
