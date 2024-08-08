@@ -30,8 +30,14 @@ nav:
     - Automotive: 'comingsoon1.md'
     - Aerospace & Satelite: 'comingsoon2.md'
     - Consumer Goods: 'comingsoon3.md'
-    - Energy & Utilities: 'comingsoon4.md'
-    - Financial Services: 'comingsoon5.md'
+    - Energy & Utilities:
+      - Enterprise Asset Management Maximo Application Suite on AWS: 'https://catalog.us-east-1.prod.workshops.aws/workshops/78554b88-0cd8-45a1-b9ee-2c1078aa6995/en-US'
+      - Renewables Data Lake & Analytics: 'https://aws.amazon.com/energy-utilities/solutions/renewables-data-lake/'
+    - Financial Services:
+      - Core Banking System Modernization:
+        - EKS Blueprints (CDK): 'https://aws-quickstart.github.io/cdk-eks-blueprints/'
+        - Application Modernization Blueprints: 'https://catalog.us-east-1.prod.workshops.aws/workshops/96f22c5f-744f-46a6-9a98-a8b65941f85f/en-US'
+        - Seismic Processing - Energy Data Insights on AWS - OSDU Data Platform: 'https://aws.amazon.com/energy-utilities/osdu-data-platform/'
     - Healthcare & Life Sciences: 'comingsoon6.md'
     - Manufacturing & Industrial: 'comingsoon7.md'
     - Media & Entertainment: 'comingsoon8.md'
