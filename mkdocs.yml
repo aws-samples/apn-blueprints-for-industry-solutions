@@ -9,7 +9,7 @@ nav:
   - Overview: 'index.md'
   - Componentized Mechanism: 'components.md'
   - Core Concepts: 'core_concepts.md'
-  - Industry Blueprints: 'comingsoon.md'
+  - Industry Blueprints:
     - Advertising & Marketing: 'comingsoon.md'
     - Automotive: 'comingsoon.md'
     - Aerospace & Satelite: 'comingsoon.md'
@@ -24,7 +24,7 @@ nav:
     - Sports: 'comingsoon.md'
     - Travel & Hospitality: 'comingsoon.md'
     - Telecommunications: 'comingsoon.md'
-  - Cross-industry Accelerators: 'comingsoon.md'
+  - Cross-industry Accelerators: 
     - Sustainability: 'comingsoon.md'
     - Data & AI Cross-industry: 'comingsoon.md'
   - Trainings: 'trainings.md'
