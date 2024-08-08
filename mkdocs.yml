@@ -12,6 +12,21 @@ nav:
   - Industry Blueprints:
     - Advertising & Marketing:
       - Customer360: 'https://github.com/aws-samples/aws-industry-blueprints-for-data-and-ai/tree/main/blueprints/datalake-warehouse-c360'
+      - Campaigns and Journeys: 'https://github.com/aws-samples/communication-developer-services-reference-architectures'
+      - Customer and User Support:
+        - Amazon Transcribe Post Call Analytics (PCA) Solution: 'https://github.com/aws-samples/amazon-transcribe-post-call-analytics'
+        - Quantiphi Real-Time Call Center Analytics: 'https://quantiphi.com/case-studies/real-time-call-center-analytics/'
+        - Amazon Transcribe Live Call Analytics (LCA) with Agent Assist Sample Solution: 'https://github.com/aws-samples/amazon-transcribe-live-call-analytics'
+      - Digital Content Creation:
+        - Generative AI for Advertising and Marketing Industry: 'https://catalog.workshops.aws/genai-advertising-marketing/en-US'
+        - Generative AI Movie Poster Generator: 'https://github.com/cloudbennett/generative-ai-sagemaker-cdk-demo/tree/main'
+      - Retail Media: 'https://github.com/aws-samples/retail-demo-store'
+      - Agency Enablement: 
+        - Guidance for Implementing Google Privacy Sandbox Key/Value Service on AWS: 'https://aws.amazon.com/solutions/guidance/implementing-google-privacy-sandbox-key-value-service-on-aws/'
+        - Guidance for Advertising Agency Planning Management on AWS: 'https://aws.amazon.com/solutions/guidance/advertising-agency-planning-management-on-aws/'
+      - Measurement, Attribution and Verification: 'https://aws.amazon.com/solutions/implementations/amazon-marketing-cloud-uploader-from-aws/?did=sl_card&trk=sl_card'
+      - Consent management & data governance in AdTech: 'https://catalog.us-east-1.prod.workshops.aws/workshops/1bf9302a-862c-4e21-9e45-c81fa055643b/en-US'
+      - Data Cleanrooms: 'https://github.com/aws-solutions/data-connectors-for-aws-clean-rooms'
     - Automotive: 'comingsoon1.md'
     - Aerospace & Satelite: 'comingsoon2.md'
     - Consumer Goods: 'comingsoon3.md'
