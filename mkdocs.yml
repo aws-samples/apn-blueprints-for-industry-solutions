@@ -1,4 +1,4 @@
-site_name: AWS Industry Blueprints for Data & AI
+site_name: APN Blueprints for Industry Solutions
 docs_dir: docs/
 
 theme:
@@ -9,61 +9,33 @@ nav:
   - Overview: 'index.md'
   - Componentized Mechanism: 'components.md'
   - Core Concepts: 'core_concepts.md'
-  - Data Ingestion Pipeline Components: 
-    - Overview: 'overview_ingestion.md'
-    - Streaming Data Solution for Amazon MSK: 'https://aws.amazon.com/solutions/implementations/streaming-data-solution-for-amazon-msk/'
-    - Streaming Data Solution for Amazon Kinesis: 'https://aws.amazon.com/solutions/implementations/streaming-data-solution-for-amazon-kinesis/'
-    - Media Exchange on AWS: 'https://aws.amazon.com/solutions/implementations/media-exchange-on-aws/'
-    - Data Connector for AWS Data Clean Rooms: 'https://aws.amazon.com/solutions/guidance/connecting-data-clean-rooms/'
-    - Media2Cloud on AWS: 'https://aws.amazon.com/solutions/implementations/media2cloud/'
-    - FiveTran: 'comingsoon.md'
-    - Matillion: 'comingsoon1.md'
-    - Informatica: 'comingsoon2.md'
-  - Add-on Use Case Components:
-    - Overview: 'overview_addon.md'
-    - RDS Plug & Play: 'https://github.com/aws-samples/amazon-isv-plug-n-play'
-    - Modular Architecture for Amazon Redshift Deployment: 'https://aws.amazon.com/quickstart/architecture/amazon-redshift/'
-    - Cabon Data Lake: 'https://aws.amazon.com/solutions/guidance/carbon-data-lake-on-aws/'
-    - Alation: 'comingsoon3.md'
-    - Collibra: 'comingsoon4.md'
-    - AWS QuickSignt Gallery: 'https://aws.amazon.com/quicksight/gallery/'
-    - CI/CD of QuickSight Assets in SaaS Silo Deployment: 'https://github.com/aws-samples/saas-silo-quicksight-assets-cicd-solution'
-    - BI in a Box: 'comingsoon5.md'
-    - dbt Labs: 'comingsoon6.md'
-    - Domo: 'comingsoon7.md'
-    - Fraud Detection: 'comingsoon8.md'
-    - ID Resolution: 'comingsoon9.md'
-    - Amperity: 'comingsoon10.md'
-    - Aerospike: 'comingsoon11.md'
-    - Amplitude: 'comingsoon12.md'
-    - Tealium: 'comingsoon13.md'
-    - Post Call Analytics (PCA): 'https://github.com/aws-samples/amazon-transcribe-post-call-analytics'
-    - Live Call Analytics (LCA) with Agent Assist: 'https://github.com/aws-samples/amazon-transcribe-live-call-analytics'
-    - Quantiphi Real-Time Call Analytics on AWS: 'https://aws-quickstart.github.io/quickstart-quantiphi-realtime-analytics/#_quantiphi_real_time_call_analytics_on_aws'
-    - Automating data lineage on Amazon MWAA with OpenLineage: 'https://github.com/aws-samples/aws-mwaa-openlineage'
-    - Data Lineage for data lakes using AWS Glue, Amazon Neptune and Spline Agent: 'https://github.com/aws-samples/data-lineage-for-data-lake-example'
-    - Content Localization on AWS: 'https://aws.amazon.com/solutions/implementations/content-localization-on-aws/'
-    - Automated Data Analytics on AWS: 'https://aws.amazon.com/solutions/implementations/automated-data-analytics-on-aws/'
-    - Personalization with Amazon ML: 'https://aws.amazon.com/solutions/implementations/maintaining-personalized-experiences-with-ml/'
-    - Real-Time Web Analytics with Kinesis Data Analytics: 'https://aws.amazon.com/solutions/implementations/real-time-web-analytics-with-kinesis/'
-    - Digital User Engagement Events Database: 'https://aws.amazon.com/solutions/implementations/digital-user-engagement-events-database/'
-    - Predictive Segmentation Using Amazon Pinpoint and Amazon SageMaker: 'https://aws.amazon.com/solutions/implementations/predictive-segmentation-using-amazon-pinpoint-and-amazon-sagemaker/'
-    - Document Understanding Solution: 'https://aws.amazon.com/solutions/implementations/document-understanding-solution/'
-    - Secure Media Delivery at the Edge on AWS: 'https://aws.amazon.com/solutions/implementations/secure-media-delivery-at-the-edge/'
-    - Amazon Marketing Cloud Insights on AWS: 'https://aws.amazon.com/solutions/implementations/amazon-marketing-cloud-insights-on-aws/'
-    - Video on Demand on AWS: 'https://aws.amazon.com/solutions/implementations/video-on-demand-on-aws/'
-    - Content Analysis on AWS: 'https://aws.amazon.com/solutions/implementations/content-analysis-on-aws/'
-  - Example Blueprints:
-    - Overview: 'overview_blueprints.md'
-    - Customer 360: 'comingsoon14.md'
-    - Supply Chain: 'comingsoon15.md'
-    - Healthcare & Life Science: 'comingsoon16.md'
-    - Manufacture & Automotive: 'comingsoon17.md'
-    - Retail & Advertising: 'comingsoon18.md'
-    - Media & Entertainment: 'comingsoon19.md'
-    - Financial Services Industry: 'comingsoon20.md'
-    - Gaming: 'comingsoon21.md'
-    - Sustainability: 'comingsoon22.md'
+  - Industry Blueprints: 
+    - Advertising & Marketing:
+      - Customer 360:
+      - Campaigns and Journeys:
+      - Customer and User Support:
+      - Digital Content Creation:
+      - Retail Media:
+      - Agency Enablement:
+      - Measurement, Attribution and Verification:
+      - Consent management & data governance in AdTech:
+      - Data Cleanrooms:
+    - Automotive:
+    - Aerospace & Satelite: 
+    - Consumer Goods: 
+    - Energy & Utilities:
+    - Financial Services:
+    - Healthcare & Life Sciences:
+    - Manufacturing & Industrial:
+    - Media & Entertainment:
+    - Public Sector:
+    - Retail:
+    - Sports:
+    - Travel & Hospitality:
+    - Telecommunications: 
+  - Cross-industry Accelerators:
+    - Sustainability:
+    - Data & AI Cross-industry:
   - Trainings: 'trainings.md'
   - Component request: 'request.md'
 
