@@ -47,7 +47,8 @@ nav:
     - Travel & Hospitality: 'comingsoon12.md'
     - Telecommunications: 'comingsoon13.md'
   - Cross-industry Accelerators: 
-    - Sustainability: 'comingsoon14.md'
+    - Sustainability:
+      - Carbon Accounting: 'https://aws.amazon.com/solutions/guidance/sustainability-insights-framework-on-aws/?did=sl_card&trk=sl_card'
     - Data & AI Cross-industry: 'comingsoon15.md'
   - Trainings: 'trainings.md'
   - Component request: 'request.md'
