@@ -11,7 +11,7 @@ nav:
   - Core Concepts: 'core_concepts.md'
   - Industry Blueprints:
     - Advertising & Marketing:
-      - Audience and Customer Data Management: '/Use Cases/Audience and Customer Data Management/Audience and Customer Data Management.md'
+      - Audience and Customer Data Management: 'Use Cases/Audience and Customer Data Management/Audience and Customer Data Management.md'
       - Customer360: 'https://github.com/aws-samples/aws-industry-blueprints-for-data-and-ai/tree/main/blueprints/datalake-warehouse-c360'
       - Campaigns and Journeys: 'https://github.com/aws-samples/communication-developer-services-reference-architectures'
       - Customer and User Support:
