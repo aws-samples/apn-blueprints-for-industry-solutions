@@ -20,7 +20,7 @@ aws_lambda_powertools
 aws-cdk.aws-cloud9-alpha
 opensearch-py
 dbt-redshift 
-apache-airflow==2.9.3
+apache-airflow==2.10.1
 apache-airflow-providers-salesforce==5.1.0
 apache-airflow-providers-amazon==6.0.0
 apache-airflow-providers-ssh==3.2.0
