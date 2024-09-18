@@ -16,8 +16,8 @@ nav:
       - Advertising Intelligence and Measurement: 'Advertising&Marketing/AdvertisingIntelligenceAndMeasurement/AdvertisingIntelligenceAndMeasurement.md'
       - Privacy Enhanced Data Collaboration: 'Advertising&Marketing/Privacy Enhanced Data Collaboration/PrivacyEnhancedDataCollaboration.md'
     - Automotive: 'Automotive/comingsoon.md'
-    - Aerospace & Satelite: 'comingsoon2.md'
-    - Consumer Goods: 'comingsoon3.md'
+    - Aerospace & Satelite: 'Aerospace&Satelite/comingsoon.md'
+    - Consumer Goods: 'ConsumerGoods/comingsoon.md'
     - Energy & Utilities:
       - Power & Utilities: 'Energy&Utilities/Power&Utilities/Power&Utilities.md'
       - Oil and Gas: 'Energy&Utilities/Oil&Gas/Oil&Gas.md'
@@ -25,14 +25,14 @@ nav:
       - Core Banking System Modernization:
         - EKS Blueprints (CDK): 'https://aws-quickstart.github.io/cdk-eks-blueprints/'
         - Application Modernization Blueprints: 'https://catalog.us-east-1.prod.workshops.aws/workshops/96f22c5f-744f-46a6-9a98-a8b65941f85f/en-US'
-    - Healthcare & Life Sciences: 'comingsoon6.md'
-    - Manufacturing & Industrial: 'comingsoon7.md'
-    - Media & Entertainment: 'comingsoon8.md'
-    - Public Sector: 'comingsoon9.md'
-    - Retail: 'comingsoon10.md'
-    - Sports: 'comingsoon11.md'
-    - Travel & Hospitality: 'comingsoon12.md'
-    - Telecommunications: 'comingsoon13.md'
+    - Healthcare & Life Sciences: 'Healthcare&LifeSciences/comingsoon.md'
+    - Manufacturing & Industrial: 'Manufacturing&Industrial/comingsoon.md'
+    - Media & Entertainment: 'Media&Entertainment/comingsoon.md'
+    - Public Sector: 'PublicSector/comingsoon.md'
+    - Retail: 'Retail/comingsoon.md'
+    - Sports: 'Sports/comingsoon.md'
+    - Travel & Hospitality: 'Travel&Hospitality/comingsoon.md'
+    - Telecommunications: 'Telecommunications/comingsoon.md'
   - Cross-industry Accelerators: 
     - Sustainability:
       - Carbon Accounting: 'https://aws.amazon.com/solutions/guidance/sustainability-insights-framework-on-aws/?did=sl_card&trk=sl_card'
