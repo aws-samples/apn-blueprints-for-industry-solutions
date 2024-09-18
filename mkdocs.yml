@@ -11,16 +11,15 @@ nav:
   - Core Concepts: 'core_concepts.md'
   - Industry Blueprints:
     - Advertising & Marketing:
-      - Audience and Customer Data Management: 'SolutionArea/AudienceAndCustomerDataManagement/AudienceAndCustomerDataManagement.md'
-      - Advertising Platforms: 'SolutionArea/AdvertisingPlatforms/AdvertisingPlatforms.md'
-      - Advertising Intelligence and Measurement: 'SolutionArea/AdvertisingIntelligenceAndMeasurement/AdvertisingIntelligenceAndMeasurement.md'
-      - Privacy Enhanced Data Collaboration: 'SolutionArea/Privacy Enhanced Data Collaboration/PrivacyEnhancedDataCollaboration.md'
-    - Automotive: 'comingsoon1.md'
-    - Aerospace & Satelite: 'comingsoon2.md'
-    - Consumer Goods: 'comingsoon3.md'
+      - Audience and Customer Data Management: 'Advertising&Marketing/AudienceAndCustomerDataManagement/AudienceAndCustomerDataManagement.md'
+      - Advertising Platforms: 'Advertising&Marketing/AdvertisingPlatforms/AdvertisingPlatforms.md'
+      - Advertising Intelligence and Measurement: 'Advertising&Marketing/AdvertisingIntelligenceAndMeasurement/AdvertisingIntelligenceAndMeasurement.md'
+      - Privacy Enhanced Data Collaboration: 'Advertising&Marketing/Privacy Enhanced Data Collaboration/PrivacyEnhancedDataCollaboration.md'
+    - Automotive: 'comingsoon.md'
+    - Aerospace & Satelite: 'comingsoon.md'
+    - Consumer Goods: 'comingsoon.md'
     - Energy & Utilities:
-      - Enterprise Asset Management Maximo Application Suite on AWS: 'https://catalog.us-east-1.prod.workshops.aws/workshops/78554b88-0cd8-45a1-b9ee-2c1078aa6995/en-US'
-      - Renewables Data Lake & Analytics: 'https://aws.amazon.com/energy-utilities/solutions/renewables-data-lake/'
+      - Power & Utilities: 'Energy&Utilities/Power&Utilities/Power&Utilities.md'
       - Seismic Processing - Energy Data Insights on AWS - OSDU Data Platform: 'https://aws.amazon.com/energy-utilities/osdu-data-platform/'
     - Financial Services:
       - Core Banking System Modernization:
