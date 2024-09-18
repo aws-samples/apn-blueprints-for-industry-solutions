@@ -20,7 +20,7 @@ nav:
     - Consumer Goods: 'comingsoon3.md'
     - Energy & Utilities:
       - Power & Utilities: 'Energy&Utilities/Power&Utilities/Power&Utilities.md'
-      - Seismic Processing - Energy Data Insights on AWS - OSDU Data Platform: 'https://aws.amazon.com/energy-utilities/osdu-data-platform/'
+      - Oil and Gas: 'Energy&Utilities/Oil&Gas/Oil&Gas.md'
     - Financial Services:
       - Core Banking System Modernization:
         - EKS Blueprints (CDK): 'https://aws-quickstart.github.io/cdk-eks-blueprints/'
