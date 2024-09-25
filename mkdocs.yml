@@ -35,29 +35,12 @@ nav:
     - Telecommunications: 'Telecommunications/comingsoon.md'
   - Cross-industry Accelerators: 
     - Sustainability:
-      - Carbon Accounting: 'https://aws.amazon.com/solutions/guidance/sustainability-insights-framework-on-aws/?did=sl_card&trk=sl_card'
-      - ESG Reporting & Disclosures: 'https://github.com/aws-solutions-library-samples/guidance-for-querying-sustainability-documents-using-generative-ai-for-esg-reporting-on-aws'
-      - Product Carbon Footprint (PCF): 
-        - Guidance for Environmental Impact Factor Mapping on AWS: 'https://aws.amazon.com/solutions/guidance/environmental-impact-factor-mapping-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Product Carbon Footprinting on AWS: 'https://aws.amazon.com/solutions/guidance/product-carbon-footprinting-on-aws/?did=sl_card&trk=sl_card'
-      - Battery Performance Management: 'https://aws.amazon.com/solutions/guidance/electric-vehicle-battery-health-prediction-on-aws/?did=sl_card&trk=sl_card'
-      - Renewable Energy Transition: 'https://aws.amazon.com/solutions/guidance/renewables-data-lake-and-analytics-on-aws/?did=sl_card&trk=sl_card'
-      - Physical Climate Risk Assessment: 'https://aws.amazon.com/solutions/guidance/physical-climate-risk-assessment-on-aws/?did=sl_card&trk=sl_card'
-      - Energy Use Optimization: 'https://aws.amazon.com/solutions/guidance/monitoring-and-optimizing-energy-usage-on-aws/?did=sl_card&trk=sl_card'
-      - Sustainable Buildings:
-        - Guidance for Smart and Sustainable Buildings on AWS: 'https://aws.amazon.com/solutions/guidance/smart-and-sustainable-buildings-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Monitoring and Optimizing Energy Usage on AWS: 'https://aws.amazon.com/solutions/guidance/monitoring-and-optimizing-energy-usage-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Utility Bill Processing on AWS: 'https://aws.amazon.com/solutions/guidance/utility-bill-processing-on-aws/?did=sl_card&trk=sl_card'
-      - Water Stewardship:
-        - Guidance for Water Use Efficiency on AWS: 'https://aws.amazon.com/solutions/guidance/water-use-efficiency-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Utility Bill Processing on AWS: 'https://aws.amazon.com/solutions/guidance/utility-bill-processing-on-aws/?did=sl_card&trk=sl_card'
-      - Value Chain Transparency:
-        - Guidance for Product Traceability on AWS: 'https://aws.amazon.com/solutions/guidance/product-traceability-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Geospatial Insights for Sustainability on AWS: 'https://aws.amazon.com/solutions/guidance/geospatial-insights-for-sustainability-on-aws/?did=sl_card&trk=sl_card'
-      - Sustainable IT:
-        - Guidance for Optimizing MLOps for Sustainability on AWS: 'https://aws.amazon.com/solutions/guidance/optimizing-mlops-for-sustainability-on-aws/?did=sl_card&trk=sl_card'
-        - Guidance for Optimizing Deep Learning Workloads for Sustainability on AWS: 'https://aws.amazon.com/solutions/guidance/optimizing-deep-learning-workloads-for-sustainability-on-aws/'
-        - Guidance for Optimizing Data Architecture for Sustainability on AWS: 'https://aws.amazon.com/solutions/guidance/optimizing-data-architecture-for-sustainability-on-aws/?did=sl_card&trk=sl_card'
+      - Carbon & ESG: 'Sustainability/Carbon&ESG/Carbon&ESG.md'
+      - Energy Transition: 'Sustainability/EnergyTransition/EnergyTransition.md'
+      - Climate & Nature: 'Sustainability/Climate&Nature/Climate&Nature.md'
+      - Sustainable Operations: 'Sustainability/SustainableOperations/SustainableOperations.md'
+      - Sustainable Value Chain: 'Sustainability/SustainableValueChain/SustainableValueChain.md'
+      - IT Infrastructure & Architecture: 'Sustainability/ITInfrastructure&Architecture/ITInfrastructure&Architecture.md'
     - Data & AI Cross-industry: 'comingsoon15.md'
   - Trainings: 'trainings.md'
   - Component request: 'request.md'
